@@ -3,6 +3,8 @@ buildscript {
     ext {
         versions = [
                 "nav_version"    : "2.5.3",
+                "hilt_compiler"  : "1.0.0",
+                "hilt"           : '2.44',
         ]
 
         gradle_version = '7.3.1'
@@ -13,6 +15,7 @@ buildscript {
 
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.nav_version"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt"
 
     }
 }

@@ -1,5 +1,6 @@
 package com.ozgursarki.shoppinglist.presentation.home
 
+import com.ozgursarki.shoppinglist.presentation.home.add.AddShoppingItemFragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,7 +9,9 @@ import android.view.ViewGroup
 import com.ozgursarki.shoppinglist.databinding.FragmentHomeScreenBinding
 import com.ozgursarki.shoppinglist.presentation.adapter.ShoppingListAdapter
 import com.ozgursarki.shoppinglist.util.DummyData
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeScreenBinding
@@ -28,6 +31,10 @@ class HomeScreenFragment : Fragment() {
 
         adapter = ShoppingListAdapter(DummyData.dummyShoppingItems())
         binding.shoppingListRV.adapter = adapter
+
+        binding.addShoppingItemButton.setOnClickListener {
+            AddShoppingItemFragment.show(requireActivity().supportFragmentManager)
+        }
     }
 
 }
