@@ -4,15 +4,15 @@
 
     <item
         android:id="@+id/save"
-        android:contentDescription="save"
+        android:contentDescription="@string/save"
         android:icon="@drawable/ic_save"
-        android:title="save"
+        android:title="@string/save"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/delete"
-        android:contentDescription="delete"
+        android:contentDescription="@string/delete"
         android:icon="@drawable/ic_delete"
-        android:title="Delete"
+        android:title="@string/delete"
         app:showAsAction="ifRoom" />
 </menu>
