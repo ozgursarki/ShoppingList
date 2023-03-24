@@ -1,4 +1,4 @@
-package com.ozgursarki.shoppinglist.domain
+package com.ozgursarki.shoppinglist.domain.model
 
 data class ShoppingList(
     val listID: Long

@@ -1,4 +1,4 @@
-package com.ozgursarki.shoppinglist.domain
+package com.ozgursarki.shoppinglist.domain.model
 
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey

@@ -2,8 +2,8 @@ package com.ozgursarki.shoppinglist.data.mapper
 
 import com.ozgursarki.shoppinglist.data.local.entities.ShoppingItemEntity
 import com.ozgursarki.shoppinglist.data.local.entities.ShoppingListEntity
-import com.ozgursarki.shoppinglist.domain.ShoppingItem
-import com.ozgursarki.shoppinglist.domain.ShoppingList
+import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
+import com.ozgursarki.shoppinglist.domain.model.ShoppingList
 
 fun ShoppingList.toShoppingListEntity(): ShoppingListEntity {
     return ShoppingListEntity(listID)

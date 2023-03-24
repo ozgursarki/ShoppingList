@@ -1,6 +1,6 @@
 package com.ozgursarki.shoppinglist.util
 
-import com.ozgursarki.shoppinglist.domain.ShoppingItem
+import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 
 object DummyData {
 

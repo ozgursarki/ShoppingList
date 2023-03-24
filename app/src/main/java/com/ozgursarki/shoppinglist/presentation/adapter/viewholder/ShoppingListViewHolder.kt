@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.ozgursarki.shoppinglist.databinding.RowShoppingItemBinding
-import com.ozgursarki.shoppinglist.domain.ShoppingItem
+import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 
 class ShoppingListViewHolder(
     private val binding: RowShoppingItemBinding
