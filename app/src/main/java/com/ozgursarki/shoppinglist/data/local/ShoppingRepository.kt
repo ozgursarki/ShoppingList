@@ -1,6 +1,6 @@
 package com.ozgursarki.shoppinglist.data.local
 
-import com.ozgursarki.shoppinglist.data.local.entities.relations.ShoppingListWithItems
+import com.ozgursarki.shoppinglist.data.local.entities.relations.ShoppingListWithItemsEntity
 import com.ozgursarki.shoppinglist.data.mapper.toShoppingItemEntity
 import com.ozgursarki.shoppinglist.data.mapper.toShoppingListEntity
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
@@ -20,7 +20,7 @@ class ShoppingRepository @Inject constructor(
         shoppingItemDAO.insertItem(shoppingItem.toShoppingItemEntity())
     }
 
-    fun getListWithItems(listID: Long) : Flow<List<ShoppingListWithItems>> {
+    fun getListWithItems(listID: Long) : Flow<List<ShoppingListWithItemsEntity>> {
         return shoppingListDAO.getListWithItems(listID)
     }
 }

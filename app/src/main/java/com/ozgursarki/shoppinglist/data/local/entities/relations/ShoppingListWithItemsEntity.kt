@@ -5,7 +5,7 @@ import androidx.room.Relation
 import com.ozgursarki.shoppinglist.data.local.entities.ShoppingItemEntity
 import com.ozgursarki.shoppinglist.data.local.entities.ShoppingListEntity
 
-data class ShoppingListWithItems(
+data class ShoppingListWithItemsEntity(
     @Embedded val shoppingListEntity: ShoppingListEntity,
     @Relation(
         parentColumn = "listID",
