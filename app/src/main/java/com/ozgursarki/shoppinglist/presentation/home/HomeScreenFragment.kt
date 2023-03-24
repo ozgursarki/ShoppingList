@@ -29,7 +29,7 @@ class HomeScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ShoppingListAdapter(DummyData.dummyShoppingItems())
+        adapter = ShoppingListAdapter()
         binding.shoppingListRV.adapter = adapter
 
         binding.addShoppingItemButton.setOnClickListener {

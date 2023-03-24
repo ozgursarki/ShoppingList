@@ -4,7 +4,7 @@ import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 
 object DummyData {
 
-    fun dummyShoppingItems(): ArrayList<ShoppingItem> {
+    /* fun dummyShoppingItems(): ArrayList<ShoppingItem> {
         val list = arrayListOf<ShoppingItem>()
         repeat(10) {
             list.add(ShoppingItem("Banana", 1))
@@ -17,4 +17,5 @@ object DummyData {
         }
         return list
     }
+     */
 }

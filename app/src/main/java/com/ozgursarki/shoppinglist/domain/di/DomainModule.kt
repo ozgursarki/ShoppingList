@@ -1,5 +1,6 @@
 package com.ozgursarki.shoppinglist.domain.di
 
+import com.ozgursarki.shoppinglist.data.local.ShoppingRepository
 import com.ozgursarki.shoppinglist.domain.usecase.GetShoppingListWithItems
 import com.ozgursarki.shoppinglist.domain.usecase.InsertShoppingItem
 import com.ozgursarki.shoppinglist.domain.usecase.InsertShoppingList
@@ -16,11 +17,11 @@ object DomainModule {
 
     @Provides
     @ViewModelScoped
-    fun provideShoppingUseCases(): ShoppingUseCase {
+    fun provideShoppingUseCases(repository: ShoppingRepository): ShoppingUseCase {
         return ShoppingUseCase(
-            insertShoppingItem = InsertShoppingItem(),
-            insertShoppingList = InsertShoppingList(),
-            getShoppingListWithItems = GetShoppingListWithItems()
+            insertShoppingItem = InsertShoppingItem(repository),
+            insertShoppingList = InsertShoppingList(repository),
+            getShoppingListWithItems = GetShoppingListWithItems(repository)
         )
     }
 }
