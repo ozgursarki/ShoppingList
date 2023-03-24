@@ -17,4 +17,10 @@ class ShoppingListAdapter(
     }
 
     override fun getItemCount(): Int = shoppingItemList.size
+
+    fun setShoppingList(newShoppingItemList: ArrayList<ShoppingItem>) {
+        shoppingItemList.clear()
+        shoppingItemList.addAll(newShoppingItemList)
+        notifyDataSetChanged()
+    }
 }

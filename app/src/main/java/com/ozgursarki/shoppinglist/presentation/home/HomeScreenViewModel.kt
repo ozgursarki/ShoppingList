@@ -6,6 +6,7 @@ import com.ozgursarki.shoppinglist.data.mapper.toShoppingListItems
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.domain.model.ShoppingList
 import com.ozgursarki.shoppinglist.domain.usecase.ShoppingUseCase
+import com.ozgursarki.shoppinglist.util.DummyData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,6 +18,10 @@ import javax.inject.Inject
 class HomeScreenViewModel @Inject constructor(
     private val shoppingListUseCases: ShoppingUseCase
 ) : ViewModel() {
+
+    init {
+        getShoppingListWithItems(DummyData.listID)
+    }
 
     private val _uiState: MutableStateFlow<HomeScreenUIState> =
         MutableStateFlow(HomeScreenUIState())
@@ -38,11 +43,7 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
-    fun insertShoppingItem(shoppingItem: ShoppingItem) {
-        viewModelScope.launch {
-            shoppingListUseCases.insertShoppingItem.invoke(shoppingItem)
-        }
-    }
+
 
     fun insertShoppingList(shoppingList: ShoppingList) {
         viewModelScope.launch {
