@@ -5,6 +5,8 @@ buildscript {
                 "nav_version"    : "2.5.3",
                 "hilt_compiler"  : "1.0.0",
                 "hilt"           : '2.44',
+                "room_version"   : "2.5.1",
+                "gson_version"   : "2.10.1"
         ]
 
         gradle_version = '7.3.1'
