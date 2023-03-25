@@ -13,13 +13,18 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.ozgursarki.shoppinglist.R
 import com.ozgursarki.shoppinglist.databinding.FragmentHomeScreenBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.domain.model.ShoppingList
 import com.ozgursarki.shoppinglist.presentation.adapter.ShoppingListAdapter
+import com.ozgursarki.shoppinglist.presentation.adapter.viewholder.HistoryListViewHolder
+import com.ozgursarki.shoppinglist.presentation.adapter.viewholder.ShoppingListViewHolder
 import com.ozgursarki.shoppinglist.presentation.enum.ViewHolderType
 import com.ozgursarki.shoppinglist.util.DateUtil
+import com.ozgursarki.shoppinglist.util.SwipeToDeleteCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.Calendar
@@ -54,6 +59,30 @@ class HomeScreenFragment : Fragment() {
                 homeScreenViewModel.shoppingList.listID
             )
         }
+
+        val swipeGesture = object: SwipeToDeleteCallback() {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val shoppingList = mutableListOf<ShoppingItem>()
+                adapter.getShoppingList().toMutableList().map { shoppingListFromAdapter ->
+                    val localeShoppingList = shoppingListFromAdapter.copy()
+                    shoppingList.add(localeShoppingList)
+                }
+
+                (viewHolder as ShoppingListViewHolder).getShoppingItem()
+                    ?.let {
+                        homeScreenViewModel.deleteShoppingItemsFromDatabase(it.itemID)
+                    }
+                shoppingList.removeAt(position)
+                val newArraylist = arrayListOf<ShoppingItem>()
+                shoppingList.forEach {
+                    newArraylist.add(it)
+                }
+                adapter.setShoppingList(newArraylist)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeGesture)
+        itemTouchHelper.attachToRecyclerView(binding.shoppingListRV)
 
         viewLifecycleOwner.lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -98,7 +127,21 @@ class HomeScreenFragment : Fragment() {
         homeScreenUiState.shoppingList.forEach {
             shoppingArrayList.add(it.copy()) //reference bug fixed
         }
-        adapter.setShoppingList(shoppingArrayList)
+        if (shoppingArrayList.isEmpty()) {
+            binding.apply {
+                shoppingListRV.visibility = View.GONE
+                viewNoData.visibility = View.VISIBLE
+                toolBar.findViewById<ActionMenuItemView>(R.id.delete).visibility = View.GONE
+            }
+        }else {
+            binding.apply {
+                shoppingListRV.visibility = View.VISIBLE
+                viewNoData.visibility = View.GONE
+                toolBar.findViewById<ActionMenuItemView>(R.id.delete).visibility = View.VISIBLE
+            }
+            adapter.setShoppingList(shoppingArrayList)
+
+        }
     }
 
 }

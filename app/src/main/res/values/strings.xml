@@ -3,7 +3,7 @@
     <string name="minusbutton">minusButton</string>
     <string name="plusbutton">plusButton</string>
     <string name="add_button">add button</string>
-    <string name="no_data">Liste Boş!</string>
+    <string name="no_data">The List is Empty!\nYou can add an item by clicking the add button</string>
     <string name="save">save</string>
     <string name="delete">delete</string>
     <!-- TODO: Remove or change this placeholder text -->

@@ -12,10 +12,14 @@ class ShoppingListViewHolder(
     private val binding: RowShoppingItemBinding,
 ) : ViewHolder(binding.root) {
 
+    private lateinit var localeShoppingItem: ShoppingItem
+
     fun bind(
         shoppingItem: ShoppingItem,
         buttonCallback: (ShoppingItem) -> Unit
     ) {
+        localeShoppingItem = shoppingItem
+
         binding.apply {
             groceryName.text = shoppingItem.name
             countText.text = shoppingItem.count.toString()
@@ -35,6 +39,14 @@ class ShoppingListViewHolder(
             Log.e("ViewHolder-Plus", shoppingItem.count.toString())
             buttonCallback.invoke(shoppingItem)
 
+        }
+    }
+
+    fun getShoppingItem(): ShoppingItem? {
+        return if (this::localeShoppingItem.isInitialized) {
+            localeShoppingItem
+        }else {
+            null
         }
     }
 
