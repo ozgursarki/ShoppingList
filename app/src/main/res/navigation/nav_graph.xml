@@ -9,5 +9,18 @@
         android:id="@+id/homeScreenFragment"
         android:name="com.ozgursarki.shoppinglist.presentation.home.HomeScreenFragment"
         android:label="fragment_home_screen"
-        tools:layout="@layout/fragment_home_screen" />
+        tools:layout="@layout/fragment_home_screen" >
+        <action
+            android:id="@+id/action_homeScreenFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.ozgursarki.shoppinglist.presentation.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" >
+        <argument
+            android:name="shoppingList"
+            app:argType="com.ozgursarki.shoppinglist.domain.model.ShoppingList" />
+    </fragment>
 </navigation>
