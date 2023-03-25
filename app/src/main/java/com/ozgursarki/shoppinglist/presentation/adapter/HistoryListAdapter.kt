@@ -7,14 +7,17 @@ import com.ozgursarki.shoppinglist.domain.model.ShoppingList
 import com.ozgursarki.shoppinglist.presentation.adapter.viewholder.HistoryListViewHolder
 
 class HistoryListAdapter(
-    private val historyItemList: ArrayList<ShoppingList> = arrayListOf()
+    private val historyItemList: ArrayList<ShoppingList> = arrayListOf(),
+    private val itemClicked: (ShoppingList) -> Unit
 ) : RecyclerView.Adapter<HistoryListViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryListViewHolder {
         return HistoryListViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: HistoryListViewHolder, position: Int) {
-        holder.bind(historyItemList[position])
+        holder.bind(historyItemList[position]) {
+            itemClicked.invoke(it)
+        }
     }
 
     override fun getItemCount(): Int = historyItemList.size

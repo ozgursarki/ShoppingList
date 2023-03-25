@@ -14,13 +14,17 @@ class HistoryListViewHolder(
 
     private lateinit var localeShoppingList : ShoppingList
 
-    fun bind(shoppingList: ShoppingList) {
+    fun bind(shoppingList: ShoppingList, itemClicked: (ShoppingList) -> Unit) {
         localeShoppingList = shoppingList
         val formatter = SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss", Locale("tr"))
 
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = shoppingList.listID
         binding.shoppingListName.text = formatter.format(calendar.time)
+
+        binding.root.setOnClickListener{
+            itemClicked.invoke(shoppingList)
+        }
 
     }
 

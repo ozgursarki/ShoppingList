@@ -18,4 +18,8 @@ interface ShoppingListDAO {
     @Query("SELECT * FROM shoppingList")
     suspend fun getAllList(): List<ShoppingListEntity>
 
+    @Transaction
+    @Query("SELECT * FROM shoppingList WHERE listID = :listID")
+    suspend fun getListWithItemsWithoutFlow(listID: Long): List<ShoppingListWithItemsEntity>
+
 }

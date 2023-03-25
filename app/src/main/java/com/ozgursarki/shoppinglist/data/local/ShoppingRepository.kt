@@ -4,8 +4,10 @@ import com.ozgursarki.shoppinglist.data.local.entities.relations.ShoppingListWit
 import com.ozgursarki.shoppinglist.data.mapper.toShoppingItemEntity
 import com.ozgursarki.shoppinglist.data.mapper.toShoppingList
 import com.ozgursarki.shoppinglist.data.mapper.toShoppingListEntity
+import com.ozgursarki.shoppinglist.data.mapper.toShoppingListItems
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.domain.model.ShoppingList
+import com.ozgursarki.shoppinglist.domain.model.ShoppingListWithItems
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -36,6 +38,12 @@ class ShoppingRepository @Inject constructor(
     suspend fun getAllList(): List<ShoppingList> {
         return shoppingListDAO.getAllList().map {
             it.toShoppingList()
+        }
+    }
+
+    suspend fun getListWithItemsWithoutFlow(listID: Long): List<ShoppingListWithItems> {
+        return shoppingListDAO.getListWithItemsWithoutFlow(listID).map {
+            it.toShoppingListItems()
         }
     }
 }

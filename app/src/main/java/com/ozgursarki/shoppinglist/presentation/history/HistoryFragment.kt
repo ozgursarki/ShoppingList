@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -40,7 +41,10 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = HistoryListAdapter()
+        adapter = HistoryListAdapter() {
+            val action = HistoryFragmentDirections.actionHistoryFragmentToDetailFragment(it)
+            findNavController().navigate(action)
+        }
         binding.historyRV.adapter = adapter
 
         val swipeGesture = object: SwipeToDeleteCallback() {
@@ -57,8 +61,11 @@ class HistoryFragment : Fragment() {
                         historyViewModel.removeListFromDatabase(it.listID)
                     }
                 shoppingList.removeAt(position)
-                adapter.notifyDataSetChanged()
-                historyViewModel.getAllShoppingList()
+                val newArraylist = arrayListOf<ShoppingList>()
+                shoppingList.forEach {
+                    newArraylist.add(it)
+                }
+                adapter.setHistoryShoppingList(newArraylist)
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeGesture)

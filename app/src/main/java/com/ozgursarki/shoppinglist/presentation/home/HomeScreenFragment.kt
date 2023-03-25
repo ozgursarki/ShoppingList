@@ -18,6 +18,7 @@ import com.ozgursarki.shoppinglist.databinding.FragmentHomeScreenBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.domain.model.ShoppingList
 import com.ozgursarki.shoppinglist.presentation.adapter.ShoppingListAdapter
+import com.ozgursarki.shoppinglist.presentation.enum.ViewHolderType
 import com.ozgursarki.shoppinglist.util.DateUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -42,7 +43,7 @@ class HomeScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ShoppingListAdapter() {
+        adapter = ShoppingListAdapter(viewHolderType = ViewHolderType.SHOPPING_VIEWHOLDER) {
             homeScreenViewModel.updateShoppingItem(it)
         }
         binding.shoppingListRV.adapter = adapter
