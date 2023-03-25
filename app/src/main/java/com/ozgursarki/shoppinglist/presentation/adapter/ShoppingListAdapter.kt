@@ -6,14 +6,17 @@ import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.presentation.adapter.viewholder.ShoppingListViewHolder
 
 class ShoppingListAdapter(
-    private val shoppingItemList: ArrayList<ShoppingItem> = arrayListOf()
+    private val shoppingItemList: ArrayList<ShoppingItem> = arrayListOf(),
+    private val buttonCallback: (ShoppingItem) -> Unit
 ) : RecyclerView.Adapter<ShoppingListViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingListViewHolder {
         return ShoppingListViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: ShoppingListViewHolder, position: Int) {
-        holder.bind(shoppingItemList[position])
+        holder.bind(shoppingItemList[position]) {
+            buttonCallback.invoke(it)
+        }
     }
 
     override fun getItemCount(): Int = shoppingItemList.size

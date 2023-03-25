@@ -15,7 +15,6 @@ import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.domain.model.ShoppingList
 import com.ozgursarki.shoppinglist.presentation.adapter.ShoppingListAdapter
 import com.ozgursarki.shoppinglist.util.DateUtil
-import com.ozgursarki.shoppinglist.util.DummyData
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.Calendar
@@ -39,7 +38,9 @@ class HomeScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ShoppingListAdapter()
+        adapter = ShoppingListAdapter() {
+
+        }
         binding.shoppingListRV.adapter = adapter
 
         binding.addShoppingItemButton.setOnClickListener {
@@ -50,7 +51,7 @@ class HomeScreenFragment : Fragment() {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     homeScreenViewModel.uiState.collect {
-                        handleNotesUIState(it)
+                        handleHomeUIState(it)
                     }
                 }
             }
@@ -71,7 +72,7 @@ class HomeScreenFragment : Fragment() {
 
     }
 
-    private fun handleNotesUIState(homeScreenUiState: HomeScreenUIState) {
+    private fun handleHomeUIState(homeScreenUiState: HomeScreenUIState) {
         val shoppingArrayList = arrayListOf<ShoppingItem>()
         homeScreenUiState.shoppingList.forEach {
             shoppingArrayList.add(it)

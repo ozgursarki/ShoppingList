@@ -54,6 +54,8 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
+
+
     fun isListCreated(): Boolean {
         return listID != 0L
     }

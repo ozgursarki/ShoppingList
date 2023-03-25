@@ -5,17 +5,33 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.ozgursarki.shoppinglist.databinding.RowShoppingItemBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
+import com.ozgursarki.shoppinglist.extension.convertToInt
 
 class ShoppingListViewHolder(
-    private val binding: RowShoppingItemBinding
+    private val binding: RowShoppingItemBinding,
 ) : ViewHolder(binding.root) {
 
     fun bind(
-        shoppingItem: ShoppingItem
+        shoppingItem: ShoppingItem,
+        buttonCallback: (ShoppingItem) -> Unit
     ) {
         binding.apply {
             groceryName.text = shoppingItem.name
             countText.text = shoppingItem.count.toString()
+        }
+
+        binding.minusButton.setOnClickListener {
+            if (binding.countText.text.convertToInt() > 0) {
+                binding.countText.text = (binding.countText.text.convertToInt() - 1).toString()
+                shoppingItem.count = binding.countText.text.convertToInt()
+                buttonCallback.invoke(shoppingItem)
+            }
+        }
+
+        binding.plusButton.setOnClickListener {
+            binding.countText.text = (binding.countText.text.convertToInt() + 1).toString()
+            buttonCallback.invoke(shoppingItem)
+
         }
     }
 
