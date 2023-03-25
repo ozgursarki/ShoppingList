@@ -18,4 +18,5 @@ class AddShoppingItemViewModel @Inject constructor(
             useCases.insertShoppingItem.invoke(shoppingItem)
         }
     }
+
 }

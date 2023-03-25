@@ -22,7 +22,7 @@ class ShoppingListViewHolder(
         }
 
         binding.minusButton.setOnClickListener {
-            if (binding.countText.text.convertToInt() > 0) {
+            if (binding.countText.text.convertToInt() > 1) {
                 //binding.countText.text = (binding.countText.text.convertToInt() - 1).toString()
                 shoppingItem.count = binding.countText.text.convertToInt() - 1
                 buttonCallback.invoke(shoppingItem)

@@ -36,16 +36,21 @@ class AddShoppingItemFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.addButton.setOnClickListener {
-            val item = ShoppingItem(
-                name = binding.shoppingItemName.text.toString(),
-                count = countText.text.convertToInt(),
-                listID = listID
-            )
-            addShoppingItemViewModel.insertShoppingItem(item)
+            if (binding.shoppingItemName.text.toString().isNotEmpty()) {
+                val item = ShoppingItem(
+                    name = binding.shoppingItemName.text.toString(),
+                    count = countText.text.convertToInt(),
+                    listID = listID
+                )
+                addShoppingItemViewModel.insertShoppingItem(item)
+            }else {
+                //Show Error
+            }
+
         }
 
         binding.minusButton.setOnClickListener {
-            if (countText.text.convertToInt() > 0) {
+            if (countText.text.convertToInt() > 1) {
                 countText.text = (countText.text.convertToInt() - 1).toString()
             }
 

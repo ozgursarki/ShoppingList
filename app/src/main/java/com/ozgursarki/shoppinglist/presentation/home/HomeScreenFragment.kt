@@ -6,10 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.ozgursarki.shoppinglist.R
 import com.ozgursarki.shoppinglist.databinding.FragmentHomeScreenBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.domain.model.ShoppingList
@@ -44,7 +47,7 @@ class HomeScreenFragment : Fragment() {
         binding.shoppingListRV.adapter = adapter
 
         binding.addShoppingItemButton.setOnClickListener {
-            AddShoppingItemFragment.show(requireActivity().supportFragmentManager, homeScreenViewModel.listID)
+            AddShoppingItemFragment.show(requireActivity().supportFragmentManager, homeScreenViewModel.shoppingList.listID)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -57,6 +60,15 @@ class HomeScreenFragment : Fragment() {
             }
         }
 
+        binding.toolBar.findViewById<ActionMenuItemView>(R.id.save).setOnClickListener {
+
+        }
+
+        binding.toolBar.findViewById<ActionMenuItemView>(R.id.delete).setOnClickListener {
+            adapter.setShoppingList(arrayListOf())
+            homeScreenViewModel.deleteShoppingList()
+        }
+
     }
 
     override fun onResume() {
@@ -66,9 +78,9 @@ class HomeScreenFragment : Fragment() {
             val date = Calendar.getInstance(DateUtil.LOCALE)
             val shoppingList = ShoppingList(date.timeInMillis)
             homeScreenViewModel.insertShoppingList(shoppingList)
-            homeScreenViewModel.listID = shoppingList.listID
+            homeScreenViewModel.shoppingList = shoppingList
         }
-        homeScreenViewModel.getShoppingListWithItems(homeScreenViewModel.listID)
+        homeScreenViewModel.getShoppingListWithItems(homeScreenViewModel.shoppingList.listID)
 
     }
 

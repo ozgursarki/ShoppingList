@@ -1,11 +1,7 @@
 package com.ozgursarki.shoppinglist.data.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Update
+import androidx.room.*
 import com.ozgursarki.shoppinglist.data.local.entities.ShoppingItemEntity
-import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 
 @Dao
 interface ShoppingItemDAO {
@@ -14,4 +10,7 @@ interface ShoppingItemDAO {
 
     @Update
     suspend fun updateShoppingItem(shoppingItemEntity: ShoppingItemEntity)
+
+    @Query("DELETE FROM shoppingItem WHERE listID = :listID")
+    suspend fun deleteRelatedShoppingItems(listID: Long)
 }

@@ -1,6 +1,5 @@
 package com.ozgursarki.shoppinglist.data.local
 
-import com.ozgursarki.shoppinglist.data.local.entities.ShoppingItemEntity
 import com.ozgursarki.shoppinglist.data.local.entities.relations.ShoppingListWithItemsEntity
 import com.ozgursarki.shoppinglist.data.mapper.toShoppingItemEntity
 import com.ozgursarki.shoppinglist.data.mapper.toShoppingListEntity
@@ -27,5 +26,9 @@ class ShoppingRepository @Inject constructor(
 
     suspend fun updateShoppingItem(shoppingItem: ShoppingItem) {
         shoppingItemDAO.updateShoppingItem(shoppingItem.toShoppingItemEntity())
+    }
+
+    suspend fun deleteRelatedShoppingItems(listID: Long) {
+        shoppingItemDAO.deleteRelatedShoppingItems(listID)
     }
 }
