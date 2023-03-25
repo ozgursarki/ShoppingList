@@ -19,5 +19,4 @@ object DummyData {
     }
      */
 
-    var listID: Long = 0
 }

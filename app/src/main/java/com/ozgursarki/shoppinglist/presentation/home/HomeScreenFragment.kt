@@ -14,9 +14,11 @@ import com.ozgursarki.shoppinglist.databinding.FragmentHomeScreenBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.domain.model.ShoppingList
 import com.ozgursarki.shoppinglist.presentation.adapter.ShoppingListAdapter
+import com.ozgursarki.shoppinglist.util.DateUtil
 import com.ozgursarki.shoppinglist.util.DummyData
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.Calendar
 
 @AndroidEntryPoint
 class HomeScreenFragment : Fragment() {
@@ -41,7 +43,7 @@ class HomeScreenFragment : Fragment() {
         binding.shoppingListRV.adapter = adapter
 
         binding.addShoppingItemButton.setOnClickListener {
-            AddShoppingItemFragment.show(requireActivity().supportFragmentManager)
+            AddShoppingItemFragment.show(requireActivity().supportFragmentManager, homeScreenViewModel.listID)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -53,9 +55,20 @@ class HomeScreenFragment : Fragment() {
                 }
             }
         }
-        val shoppingList = ShoppingList(System.currentTimeMillis())
-        homeScreenViewModel.insertShoppingList(shoppingList)
-        DummyData.listID = shoppingList.listID
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (!homeScreenViewModel.isListCreated()) {
+            val date = Calendar.getInstance(DateUtil.LOCALE)
+            val shoppingList = ShoppingList(date.timeInMillis)
+            homeScreenViewModel.insertShoppingList(shoppingList)
+            homeScreenViewModel.listID = shoppingList.listID
+        }
+        homeScreenViewModel.getShoppingListWithItems(homeScreenViewModel.listID)
+
     }
 
     private fun handleNotesUIState(homeScreenUiState: HomeScreenUIState) {

@@ -10,9 +10,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ozgursarki.shoppinglist.databinding.FragmentAddShoppingItemBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.util.DummyData
+import dagger.hilt.android.AndroidEntryPoint
 
 
-class AddShoppingItemFragment : BottomSheetDialogFragment() {
+@AndroidEntryPoint
+class AddShoppingItemFragment(
+    private val listID: Long
+) : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentAddShoppingItemBinding
     private val addShoppingItemViewModel: AddShoppingItemViewModel by viewModels()
@@ -31,7 +35,7 @@ class AddShoppingItemFragment : BottomSheetDialogFragment() {
             val item = ShoppingItem(
                 name = binding.shoppingItemName.text.toString(),
                 count = 4,
-                listID = DummyData.listID
+                listID = listID
             )
             addShoppingItemViewModel.insertShoppingItem(item)
         }
@@ -39,8 +43,8 @@ class AddShoppingItemFragment : BottomSheetDialogFragment() {
 
     companion object {
         private const val BOTTOM_SHEET_TAG = "com.ozgursarki.shoppinglist.presentation.home.add.AddShoppingItemFragment"
-        fun show(fragmentManager: FragmentManager) {
-            val bottomSheet = AddShoppingItemFragment()
+        fun show(fragmentManager: FragmentManager, listID: Long) {
+            val bottomSheet = AddShoppingItemFragment(listID)
             bottomSheet.show(fragmentManager, BOTTOM_SHEET_TAG)
         }
     }

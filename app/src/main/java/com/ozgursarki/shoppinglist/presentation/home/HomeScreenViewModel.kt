@@ -19,9 +19,8 @@ class HomeScreenViewModel @Inject constructor(
     private val shoppingListUseCases: ShoppingUseCase
 ) : ViewModel() {
 
-    init {
-        getShoppingListWithItems(DummyData.listID)
-    }
+
+    var listID: Long = 0
 
     private val _uiState: MutableStateFlow<HomeScreenUIState> =
         MutableStateFlow(HomeScreenUIState())
@@ -37,7 +36,11 @@ class HomeScreenViewModel @Inject constructor(
                     val shoppingItems = shoppingListItems.map {
                         it.toShoppingListItems()
                     }
-                    homeScreenUIState.copy(shoppingList = shoppingItems[0].shoppingItemList)
+                    try {
+                        homeScreenUIState.copy(shoppingList = shoppingItems[0].shoppingItemList)
+                    } catch (e: Exception) {
+                        HomeScreenUIState(arrayListOf())
+                    }
                 }
             }
         }
@@ -49,5 +52,9 @@ class HomeScreenViewModel @Inject constructor(
         viewModelScope.launch {
             shoppingListUseCases.insertShoppingList.invoke(shoppingList)
         }
+    }
+
+    fun isListCreated(): Boolean {
+        return listID != 0L
     }
 }
