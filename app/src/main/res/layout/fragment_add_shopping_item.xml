@@ -67,7 +67,8 @@
         app:layout_constraintBottom_toBottomOf="@id/plusButton"
         app:layout_constraintEnd_toStartOf="@id/plusButton"
         app:layout_constraintTop_toTopOf="@id/plusButton"
-        tools:text="17" />
+        tools:text="17"
+        android:text="0"/>
 
     <ImageButton
         android:id="@+id/plusButton"

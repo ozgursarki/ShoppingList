@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ozgursarki.shoppinglist.databinding.FragmentAddShoppingItemBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
+import com.ozgursarki.shoppinglist.extension.convertToInt
 import com.ozgursarki.shoppinglist.util.DummyData
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,12 +22,14 @@ class AddShoppingItemFragment(
 
     private lateinit var binding: FragmentAddShoppingItemBinding
     private val addShoppingItemViewModel: AddShoppingItemViewModel by viewModels()
+    private lateinit var countText: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAddShoppingItemBinding.inflate(inflater)
+        countText = binding.countText
         return binding.root
     }
 
@@ -34,10 +38,21 @@ class AddShoppingItemFragment(
         binding.addButton.setOnClickListener {
             val item = ShoppingItem(
                 name = binding.shoppingItemName.text.toString(),
-                count = 4,
+                count = countText.text.convertToInt(),
                 listID = listID
             )
             addShoppingItemViewModel.insertShoppingItem(item)
+        }
+
+        binding.minusButton.setOnClickListener {
+            if (countText.text.convertToInt() > 0) {
+                countText.text = (countText.text.convertToInt() - 1).toString()
+            }
+
+        }
+
+        binding.plusButton.setOnClickListener {
+            countText.text = (countText.text.convertToInt() + 1).toString()
         }
     }
 
