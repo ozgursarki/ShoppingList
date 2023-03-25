@@ -1,10 +1,7 @@
 package com.ozgursarki.shoppinglist.domain.di
 
 import com.ozgursarki.shoppinglist.data.local.ShoppingRepository
-import com.ozgursarki.shoppinglist.domain.usecase.GetShoppingListWithItems
-import com.ozgursarki.shoppinglist.domain.usecase.InsertShoppingItem
-import com.ozgursarki.shoppinglist.domain.usecase.InsertShoppingList
-import com.ozgursarki.shoppinglist.domain.usecase.ShoppingUseCase
+import com.ozgursarki.shoppinglist.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,7 +18,8 @@ object DomainModule {
         return ShoppingUseCase(
             insertShoppingItem = InsertShoppingItem(repository),
             insertShoppingList = InsertShoppingList(repository),
-            getShoppingListWithItems = GetShoppingListWithItems(repository)
+            getShoppingListWithItems = GetShoppingListWithItems(repository),
+            updateShoppingItem = UpdateShoppingItem(repository)
         )
     }
 }

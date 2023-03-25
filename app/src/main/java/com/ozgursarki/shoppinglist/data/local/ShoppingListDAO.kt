@@ -14,6 +14,3 @@ interface ShoppingListDAO {
     @Query("SELECT * FROM shoppingList WHERE listID = :listID")
     fun getListWithItems(listID: Long): Flow<List<ShoppingListWithItemsEntity>>
 }
-
-//@Query("SELECT * FROM NoteEntity WHERE note_location = :location")
-//    suspend fun getNoteByLocation(location: String) : NoteEntity

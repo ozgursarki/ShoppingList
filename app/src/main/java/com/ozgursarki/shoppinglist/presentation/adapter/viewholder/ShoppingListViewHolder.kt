@@ -1,5 +1,6 @@
 package com.ozgursarki.shoppinglist.presentation.adapter.viewholder
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -22,14 +23,16 @@ class ShoppingListViewHolder(
 
         binding.minusButton.setOnClickListener {
             if (binding.countText.text.convertToInt() > 0) {
-                binding.countText.text = (binding.countText.text.convertToInt() - 1).toString()
-                shoppingItem.count = binding.countText.text.convertToInt()
+                //binding.countText.text = (binding.countText.text.convertToInt() - 1).toString()
+                shoppingItem.count = binding.countText.text.convertToInt() - 1
                 buttonCallback.invoke(shoppingItem)
             }
         }
 
         binding.plusButton.setOnClickListener {
-            binding.countText.text = (binding.countText.text.convertToInt() + 1).toString()
+            //binding.countText.text = (binding.countText.text.convertToInt() + 1).toString()
+            shoppingItem.count = binding.countText.text.convertToInt() + 1
+            Log.e("ViewHolder-Plus", shoppingItem.count.toString())
             buttonCallback.invoke(shoppingItem)
 
         }

@@ -10,6 +10,7 @@ import com.ozgursarki.shoppinglist.util.DummyData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,7 +27,7 @@ class HomeScreenViewModel @Inject constructor(
         MutableStateFlow(HomeScreenUIState())
 
     val uiState: StateFlow<HomeScreenUIState>
-        get() = _uiState
+        get() = _uiState.asStateFlow()
 
     fun getShoppingListWithItems(listID: Long) {
         viewModelScope.launch {
@@ -54,6 +55,11 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
+    fun updateShoppingItem(shoppingItem: ShoppingItem) {
+        viewModelScope.launch {
+            shoppingListUseCases.updateShoppingItem.invoke(shoppingItem)
+        }
+    }
 
 
     fun isListCreated(): Boolean {

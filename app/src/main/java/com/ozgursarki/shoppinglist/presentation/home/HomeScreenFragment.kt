@@ -39,7 +39,7 @@ class HomeScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = ShoppingListAdapter() {
-
+            homeScreenViewModel.updateShoppingItem(it)
         }
         binding.shoppingListRV.adapter = adapter
 
@@ -75,7 +75,7 @@ class HomeScreenFragment : Fragment() {
     private fun handleHomeUIState(homeScreenUiState: HomeScreenUIState) {
         val shoppingArrayList = arrayListOf<ShoppingItem>()
         homeScreenUiState.shoppingList.forEach {
-            shoppingArrayList.add(it)
+            shoppingArrayList.add(it.copy()) //reference bug fixed
         }
         adapter.setShoppingList(shoppingArrayList)
     }
