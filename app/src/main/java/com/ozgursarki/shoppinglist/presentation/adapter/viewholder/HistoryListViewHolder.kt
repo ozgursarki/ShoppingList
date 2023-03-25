@@ -12,13 +12,24 @@ class HistoryListViewHolder(
     private val binding: RowHistoryItemBinding
 ) : ViewHolder(binding.root) {
 
+    private lateinit var localeShoppingList : ShoppingList
+
     fun bind(shoppingList: ShoppingList) {
+        localeShoppingList = shoppingList
         val formatter = SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss", Locale("tr"))
 
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = shoppingList.listID
         binding.shoppingListName.text = formatter.format(calendar.time)
 
+    }
+
+    fun getShoppingList(): ShoppingList? {
+        return if (this::localeShoppingList.isInitialized) {
+            localeShoppingList
+        }else {
+            null
+        }
     }
 
     companion object {

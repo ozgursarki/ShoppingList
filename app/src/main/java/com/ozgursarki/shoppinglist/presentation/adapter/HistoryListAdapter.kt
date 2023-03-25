@@ -24,4 +24,8 @@ class HistoryListAdapter(
         historyItemList.addAll(newHistoryItemList)
         notifyDataSetChanged()
     }
+
+    fun getHistoryItemList(): ArrayList<ShoppingList> {
+        return historyItemList
+    }
 }
