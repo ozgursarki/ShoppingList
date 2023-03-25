@@ -79,6 +79,10 @@ class HistoryFragment : Fragment() {
             }
             adapter.setHistoryShoppingList(shoppingArrayList)
         }
+
+        binding.createShoppingList.setOnClickListener {
+            findNavController().navigate(R.id.action_historyFragment_to_homeScreenFragment)
+        }
     }
 
     override fun onResume() {
