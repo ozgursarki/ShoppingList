@@ -26,4 +26,8 @@ class ShoppingListAdapter(
         shoppingItemList.addAll(newShoppingItemList)
         notifyDataSetChanged()
     }
+
+    fun isListEmpty(): Boolean {
+        return shoppingItemList.isEmpty()
+    }
 }

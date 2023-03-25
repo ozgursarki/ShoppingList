@@ -5,5 +5,6 @@ data class ShoppingUseCase(
     val insertShoppingList: InsertShoppingList,
     val getShoppingListWithItems: GetShoppingListWithItems,
     val updateShoppingItem: UpdateShoppingItem,
-    val deleteRelatedShoppingItems: DeleteRelatedShoppingItems
+    val deleteRelatedShoppingItems: DeleteRelatedShoppingItems,
+    val getAllShoppingList: GetAllShoppingList
 )

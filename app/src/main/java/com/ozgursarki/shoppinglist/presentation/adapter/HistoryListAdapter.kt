@@ -18,4 +18,10 @@ class HistoryListAdapter(
     }
 
     override fun getItemCount(): Int = historyItemList.size
+
+    fun setHistoryShoppingList(newHistoryItemList: ArrayList<ShoppingList>) {
+        historyItemList.clear()
+        historyItemList.addAll(newHistoryItemList)
+        notifyDataSetChanged()
+    }
 }

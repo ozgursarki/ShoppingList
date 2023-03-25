@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.ozgursarki.shoppinglist.R
 import com.ozgursarki.shoppinglist.databinding.FragmentHomeScreenBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
@@ -26,7 +27,7 @@ import java.util.Calendar
 class HomeScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeScreenBinding
-    private lateinit var adapter : ShoppingListAdapter
+    private lateinit var adapter: ShoppingListAdapter
     private val homeScreenViewModel: HomeScreenViewModel by viewModels()
 
 
@@ -47,7 +48,10 @@ class HomeScreenFragment : Fragment() {
         binding.shoppingListRV.adapter = adapter
 
         binding.addShoppingItemButton.setOnClickListener {
-            AddShoppingItemFragment.show(requireActivity().supportFragmentManager, homeScreenViewModel.shoppingList.listID)
+            AddShoppingItemFragment.show(
+                requireActivity().supportFragmentManager,
+                homeScreenViewModel.shoppingList.listID
+            )
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -61,7 +65,11 @@ class HomeScreenFragment : Fragment() {
         }
 
         binding.toolBar.findViewById<ActionMenuItemView>(R.id.save).setOnClickListener {
-
+            if (!adapter.isListEmpty()) {
+                findNavController().navigate(R.id.action_homeScreenFragment_to_historyFragment)
+            } else {
+                //Show Error
+            }
         }
 
         binding.toolBar.findViewById<ActionMenuItemView>(R.id.delete).setOnClickListener {

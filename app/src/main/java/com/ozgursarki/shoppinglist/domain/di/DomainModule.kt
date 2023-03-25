@@ -20,7 +20,8 @@ object DomainModule {
             insertShoppingList = InsertShoppingList(repository),
             getShoppingListWithItems = GetShoppingListWithItems(repository),
             updateShoppingItem = UpdateShoppingItem(repository),
-            deleteRelatedShoppingItems = DeleteRelatedShoppingItems(repository)
+            deleteRelatedShoppingItems = DeleteRelatedShoppingItems(repository),
+            getAllShoppingList = GetAllShoppingList(repository)
         )
     }
 }

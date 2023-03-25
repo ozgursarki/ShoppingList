@@ -2,6 +2,7 @@ package com.ozgursarki.shoppinglist.data.local
 
 import com.ozgursarki.shoppinglist.data.local.entities.relations.ShoppingListWithItemsEntity
 import com.ozgursarki.shoppinglist.data.mapper.toShoppingItemEntity
+import com.ozgursarki.shoppinglist.data.mapper.toShoppingList
 import com.ozgursarki.shoppinglist.data.mapper.toShoppingListEntity
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.domain.model.ShoppingList
@@ -30,5 +31,11 @@ class ShoppingRepository @Inject constructor(
 
     suspend fun deleteRelatedShoppingItems(listID: Long) {
         shoppingItemDAO.deleteRelatedShoppingItems(listID)
+    }
+
+    suspend fun getAllList(): List<ShoppingList> {
+        return shoppingListDAO.getAllList().map {
+            it.toShoppingList()
+        }
     }
 }
