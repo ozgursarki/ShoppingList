@@ -24,8 +24,14 @@ class ShoppingRepository @Inject constructor(
         shoppingItemDAO.insertItem(shoppingItem.toShoppingItemEntity())
     }
 
-    fun getListWithItems(listID: Long) : Flow<List<ShoppingListWithItemsEntity>> {
-        return shoppingListDAO.getListWithItems(listID)
+    fun getListWithItems(listID: Long) : Result<Flow<List<ShoppingListWithItemsEntity>>> {
+        return try {
+            val shoppingListWithItems = shoppingListDAO.getListWithItems(listID)
+            Result.success(shoppingListWithItems)
+        }catch (e: Exception) {
+            Result.failure(e)
+        }
+
     }
 
     suspend fun updateShoppingItem(shoppingItem: ShoppingItem) {

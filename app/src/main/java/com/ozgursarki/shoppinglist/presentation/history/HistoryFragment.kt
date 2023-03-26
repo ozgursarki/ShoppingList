@@ -59,6 +59,7 @@ class HistoryFragment : Fragment() {
                 (viewHolder as HistoryListViewHolder).getShoppingList()
                     ?.let {
                         historyViewModel.removeListFromDatabase(it.listID)
+                        historyViewModel.removeAllRelatedItems(it.listID)
                     }
                 shoppingList.removeAt(position)
                 val newArraylist = arrayListOf<ShoppingList>()

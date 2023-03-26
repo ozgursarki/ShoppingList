@@ -32,4 +32,10 @@ class HistoryViewModel @Inject constructor(
             useCase.deleteRelatedShoppingItems.invoke(listID)
         }
     }
+
+    fun removeAllRelatedItems(listID: Long) {
+        viewModelScope.launch {
+            useCase.deleteRelatedShoppingItems.invoke(listID)
+        }
+    }
 }

@@ -28,22 +28,27 @@ class HomeScreenViewModel @Inject constructor(
 
     fun getShoppingListWithItems(listID: Long) {
         viewModelScope.launch {
-            val shoppingListWithItems = shoppingListUseCases.getShoppingListWithItems.invoke(listID)
-            shoppingListWithItems.collect { shoppingListItems ->
-                _uiState.update { homeScreenUIState ->
-                    val shoppingItems = shoppingListItems.map {
-                        it.toShoppingListItems()
-                    }
-                    try {
-                        homeScreenUIState.copy(shoppingList = shoppingItems[0].shoppingItemList)
-                    } catch (e: Exception) {
-                        HomeScreenUIState(arrayListOf())
+            shoppingListUseCases.getShoppingListWithItems.invoke(listID)
+                .onSuccess {
+                    it.collect { shoppingListItems ->
+                        _uiState.update { homeScreenUIState ->
+                            val shoppingItems = shoppingListItems.map {
+                                it.toShoppingListItems()
+                            }
+
+                            homeScreenUIState.copy(shoppingList = shoppingItems[0].shoppingItemList, true)
+
+                        }
                     }
                 }
-            }
+                .onFailure {
+                    _uiState.update { homeScreenUIState ->
+                        homeScreenUIState.copy(listOf(), false)
+                    }
+                }
+
         }
     }
-
 
 
     fun insertShoppingList(shoppingList: ShoppingList) {
@@ -65,9 +70,9 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
-    fun deleteShoppingItemsFromDatabase(listID: Long) {
+    fun deleteShoppingItemsFromDatabase(itemID: Long) {
         viewModelScope.launch {
-            shoppingListUseCases.deleteRelatedShoppingItems.invoke(listID)
+            shoppingListUseCases.deleteRelatedShoppingItems.invoke(itemID)
         }
     }
 

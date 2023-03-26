@@ -9,7 +9,7 @@ class GetShoppingListWithItems @Inject constructor(
     private val repository: ShoppingRepository
 ) {
 
-    operator fun invoke(listID: Long): Flow<List<ShoppingListWithItemsEntity>> {
+    operator fun invoke(listID: Long): Result<Flow<List<ShoppingListWithItemsEntity>>> {
         return repository.getListWithItems(listID)
     }
 }
