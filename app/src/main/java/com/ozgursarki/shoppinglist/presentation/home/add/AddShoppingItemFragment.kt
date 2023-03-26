@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.ozgursarki.shoppinglist.R
 import com.ozgursarki.shoppinglist.databinding.FragmentAddShoppingItemBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.extension.convertToInt
@@ -77,6 +78,7 @@ class AddShoppingItemFragment(
         private const val BOTTOM_SHEET_TAG = "com.ozgursarki.shoppinglist.presentation.home.add.AddShoppingItemFragment"
         fun show(fragmentManager: FragmentManager, listID: Long) {
             val bottomSheet = AddShoppingItemFragment(listID)
+            bottomSheet.setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
             bottomSheet.show(fragmentManager, BOTTOM_SHEET_TAG)
         }
     }

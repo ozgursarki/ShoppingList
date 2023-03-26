@@ -5,7 +5,9 @@
     style="@style/Widget.BottomSheet"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_background"
     android:paddingHorizontal="10dp"
+    android:paddingBottom="40dp"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
 
@@ -14,9 +16,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:text="Enter New Shopping Item"
+        android:textAllCaps="true"
+        android:textColor="@color/neon_purple"
+        android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        android:text="Enter New Item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,33 +29,44 @@
         android:id="@+id/shoppingItemName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Enter Name"
+        android:background="@drawable/edit_background"
+        android:ellipsize="end"
+        android:hint="Enter Shopping Item Name"
         android:inputType="text"
         android:lines="1"
-        android:ellipsize="end"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/minusButton"
+        app:layout_constraintEnd_toStartOf="@+id/minusButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_text"
-        app:layout_constraintEnd_toStartOf="@+id/minusButton"
-        app:layout_constraintTop_toTopOf="@id/minusButton"
-        app:layout_constraintBottom_toBottomOf="@id/minusButton"/>
+        app:layout_constraintTop_toTopOf="@id/minusButton" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
         android:id="@+id/addButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:backgroundTint="@color/neon_purple"
         android:text="Add Item"
+        android:textColor="@color/white"
         app:backgroundTint="@null"
+        app:icon="@drawable/ic_plus_circle"
+        android:layout_marginTop="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shoppingItemName" />
+        app:layout_constraintTop_toBottomOf="@+id/shoppingItemName"
+        app:shapeAppearance="@style/ShapeAppearance.Material3.Tooltip"
+        app:strokeColor="@color/neon_purple"
+        app:strokeWidth="19dp" />
+
 
     <ImageButton
         android:id="@+id/minusButton"
-        android:contentDescription="@string/minusbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:contentDescription="@string/minusbutton"
         android:src="@drawable/ic_minus_circle"
         app:layout_constraintBottom_toBottomOf="@id/count_text"
         app:layout_constraintEnd_toStartOf="@id/count_text"
@@ -61,30 +76,26 @@
         android:id="@+id/count_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="10dp"
-        android:textColor="@color/black"
         android:gravity="center"
+        android:paddingHorizontal="10dp"
+        android:text="1"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@id/plusButton"
         app:layout_constraintEnd_toStartOf="@id/plusButton"
         app:layout_constraintTop_toTopOf="@id/plusButton"
-        tools:text="17"
-        android:text="1"/>
+        tools:text="17" />
 
     <ImageButton
         android:id="@+id/plusButton"
-        android:contentDescription="@string/plusbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@color/white"
+        android:contentDescription="@string/plusbutton"
         android:src="@drawable/ic_plus_circle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
