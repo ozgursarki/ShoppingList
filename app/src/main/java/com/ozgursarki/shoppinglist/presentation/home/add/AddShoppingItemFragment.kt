@@ -35,14 +35,11 @@ class AddShoppingItemFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         binding.addButton.setOnClickListener {
             if (binding.shoppingItemName.text.toString().isNotEmpty()) {
-                val item = ShoppingItem(
-                    name = binding.shoppingItemName.text.toString(),
-                    count = countText.text.convertToInt(),
-                    listID = listID
-                )
-                addShoppingItemViewModel.insertShoppingItem(item)
+                addShoppingItemViewModel.getShoppingItemsByListID(listID, binding.shoppingItemName.text.toString())
             }else {
                 //Show Error
             }
@@ -58,6 +55,21 @@ class AddShoppingItemFragment(
 
         binding.plusButton.setOnClickListener {
             countText.text = (countText.text.convertToInt() + 1).toString()
+        }
+
+        addShoppingItemViewModel.isItemExist.observe(viewLifecycleOwner) {
+            if (it.first) {
+                val item = ShoppingItem(
+                    name = binding.shoppingItemName.text.toString(),
+                    count = countText.text.convertToInt(),
+                    listID = listID
+                )
+                addShoppingItemViewModel.insertShoppingItem(item)
+            } else {
+                it.second?.let { shoppingItem ->
+                    addShoppingItemViewModel.updateShoppingItem(shoppingItem.copy(count = binding.countText.text.convertToInt() + shoppingItem.count))
+                }
+            }
         }
     }
 
