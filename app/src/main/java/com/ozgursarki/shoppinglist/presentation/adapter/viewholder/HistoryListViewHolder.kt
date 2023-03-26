@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.ozgursarki.shoppinglist.databinding.RowHistoryItemBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingList
+import com.ozgursarki.shoppinglist.util.DateUtil
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -16,11 +17,8 @@ class HistoryListViewHolder(
 
     fun bind(shoppingList: ShoppingList, itemClicked: (ShoppingList) -> Unit) {
         localeShoppingList = shoppingList
-        val formatter = SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss", Locale("tr"))
 
-        val calendar = Calendar.getInstance()
-        calendar.timeInMillis = shoppingList.listID
-        binding.shoppingListName.text = formatter.format(calendar.time)
+        binding.shoppingListName.text = DateUtil.getDateInTurkish(shoppingList.listID)
 
         binding.root.setOnClickListener{
             itemClicked.invoke(shoppingList)

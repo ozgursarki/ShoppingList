@@ -14,6 +14,7 @@ import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.presentation.adapter.ShoppingListAdapter
 import com.ozgursarki.shoppinglist.presentation.enum.ViewHolderType
 import com.ozgursarki.shoppinglist.presentation.history.HistoryViewModel
+import com.ozgursarki.shoppinglist.util.DateUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,7 +43,7 @@ class DetailFragment : Fragment() {
         binding.detailRV.adapter = adapter
 
         val shoppingList = args.shoppingList
-        binding.toolBar.title = shoppingList.listID.toString()
+        binding.toolBar.title = DateUtil.getDateInTurkish(shoppingList.listID)
 
         detailViewModel.shoppingList.observe(viewLifecycleOwner) { shoppingListFromDatabase ->
             val shoppingArrayList = arrayListOf<ShoppingItem>()
