@@ -102,6 +102,10 @@ class HomeScreenFragment : Fragment() {
             }
         }
 
+        binding.toolBar.findViewById<ActionMenuItemView>(R.id.navigate).setOnClickListener{
+            findNavController().navigate(R.id.action_homeScreenFragment_to_historyFragment)
+        }
+
         binding.toolBar.findViewById<ActionMenuItemView>(R.id.delete).setOnClickListener {
             adapter.setShoppingList(arrayListOf())
             homeScreenViewModel.deleteShoppingList()

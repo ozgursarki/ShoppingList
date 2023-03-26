@@ -20,6 +20,7 @@
             style="@style/ThemeOverlay.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/white"
             app:menu="@menu/toolbar_menu"
             app:title="NEON APPS" />
     </com.google.android.material.appbar.AppBarLayout>
