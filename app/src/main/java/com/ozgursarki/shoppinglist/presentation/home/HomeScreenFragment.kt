@@ -1,5 +1,6 @@
 package com.ozgursarki.shoppinglist.presentation.home
 
+import android.content.DialogInterface
 import com.ozgursarki.shoppinglist.presentation.home.add.AddShoppingItemFragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.view.menu.ActionMenuItemView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +17,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ozgursarki.shoppinglist.R
 import com.ozgursarki.shoppinglist.databinding.FragmentHomeScreenBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
@@ -23,7 +26,9 @@ import com.ozgursarki.shoppinglist.presentation.adapter.ShoppingListAdapter
 import com.ozgursarki.shoppinglist.presentation.adapter.viewholder.HistoryListViewHolder
 import com.ozgursarki.shoppinglist.presentation.adapter.viewholder.ShoppingListViewHolder
 import com.ozgursarki.shoppinglist.presentation.enum.ViewHolderType
+import com.ozgursarki.shoppinglist.presentation.popup.ShoppingWarningDialogFragment
 import com.ozgursarki.shoppinglist.util.DateUtil
+import com.ozgursarki.shoppinglist.util.PopUpHelper
 import com.ozgursarki.shoppinglist.util.SwipeToDeleteCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -98,7 +103,7 @@ class HomeScreenFragment : Fragment() {
             if (!adapter.isListEmpty()) {
                 findNavController().navigate(R.id.action_homeScreenFragment_to_historyFragment)
             } else {
-                //Show Error
+                PopUpHelper.showErrorPopUp(requireActivity().getString(R.string.error_empty_list), requireContext())
             }
         }
 

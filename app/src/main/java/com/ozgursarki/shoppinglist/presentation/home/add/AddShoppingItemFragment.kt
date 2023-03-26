@@ -13,6 +13,7 @@ import com.ozgursarki.shoppinglist.databinding.FragmentAddShoppingItemBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.extension.convertToInt
 import com.ozgursarki.shoppinglist.util.DummyData
+import com.ozgursarki.shoppinglist.util.PopUpHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -42,7 +43,7 @@ class AddShoppingItemFragment(
             if (binding.shoppingItemName.text.toString().isNotEmpty()) {
                 addShoppingItemViewModel.getShoppingItemsByListID(listID, binding.shoppingItemName.text.toString())
             }else {
-                //Show Error
+                PopUpHelper.showErrorPopUp(requireActivity().getString(R.string.error_empty_name), requireContext())
             }
 
         }
