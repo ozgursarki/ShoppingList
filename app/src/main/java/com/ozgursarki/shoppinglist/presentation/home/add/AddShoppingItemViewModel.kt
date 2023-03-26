@@ -29,7 +29,12 @@ class AddShoppingItemViewModel @Inject constructor(
         val itemList: ArrayList<ShoppingItem> = arrayListOf()
         viewModelScope.launch {
             val list = useCases.getAllShoppingItemsWithoutFlow.invoke(listID)
-            itemList.addAll(list[0].shoppingItemList)
+            val localeList = try {
+                list[0].shoppingItemList
+            }catch (e:Exception) {
+                arrayListOf<ShoppingItem>()
+            }
+            itemList.addAll(localeList)
             val newList = itemList.filter {
                 it.listID == listID && it.name == itemName
             }
