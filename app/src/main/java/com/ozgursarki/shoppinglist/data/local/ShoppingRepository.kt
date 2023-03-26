@@ -38,8 +38,8 @@ class ShoppingRepository @Inject constructor(
         shoppingItemDAO.updateShoppingItem(shoppingItem.toShoppingItemEntity())
     }
 
-    suspend fun deleteRelatedShoppingItems(listID: Long) {
-        shoppingItemDAO.deleteRelatedShoppingItems(listID)
+    suspend fun deleteRelatedShoppingItem(listID: Long) {
+        shoppingItemDAO.deleteRelatedShoppingItem(listID)
     }
 
     suspend fun getAllList(): List<ShoppingList> {
@@ -52,6 +52,10 @@ class ShoppingRepository @Inject constructor(
         return shoppingListDAO.getListWithItemsWithoutFlow(listID).map {
             it.toShoppingListItems()
         }
+    }
+
+    suspend fun deleteShoppingList(listID: Long) {
+        shoppingListDAO.deleteShoppingList(listID)
     }
 
     fun saveListID(listID: Long) {

@@ -20,9 +20,10 @@ object DomainModule {
             insertShoppingList = InsertShoppingList(repository),
             getShoppingListWithItems = GetShoppingListWithItems(repository),
             updateShoppingItem = UpdateShoppingItem(repository),
-            deleteRelatedShoppingItems = DeleteRelatedShoppingItems(repository),
+            deleteRelatedShoppingItem = DeleteRelatedShoppingItem(repository),
             getAllShoppingList = GetAllShoppingList(repository),
             getAllShoppingItemsWithoutFlow = GetAllShoppingItemsWithoutFlow(repository),
+            deleteShoppingList = DeleteShoppingList(repository),
             getListID = GetListID(repository),
             saveListID = SaveListID(repository)
         )

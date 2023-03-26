@@ -6,10 +6,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:elevation="5dp"
-    app:cardCornerRadius="8dp"
+    app:cardElevation="5dp"
+    android:padding="10dp"
+    app:cardCornerRadius="5dp"
     app:strokeColor="@color/black"
-    app:strokeWidth="2dp"
+    app:strokeWidth="1dp"
     android:layout_width="match_parent"
     >
     <FrameLayout

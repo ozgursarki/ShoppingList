@@ -12,8 +12,6 @@ interface ShoppingItemDAO {
     suspend fun updateShoppingItem(shoppingItemEntity: ShoppingItemEntity)
 
     @Query("DELETE FROM shoppingItem WHERE itemID = :itemID")
-    suspend fun deleteRelatedShoppingItems(itemID: Long)
-
-    @Query("DELETE FROM shoppingItem WHERE itemID = :itemID")
     suspend fun deleteRelatedShoppingItem(itemID: Long)
+
 }
