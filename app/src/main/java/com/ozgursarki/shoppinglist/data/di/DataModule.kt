@@ -1,11 +1,10 @@
 package com.ozgursarki.shoppinglist.data.di
 
+import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
-import com.ozgursarki.shoppinglist.data.local.ShoppingDatabase
-import com.ozgursarki.shoppinglist.data.local.ShoppingItemDAO
-import com.ozgursarki.shoppinglist.data.local.ShoppingListDAO
-import com.ozgursarki.shoppinglist.data.local.ShoppingRepository
+import com.ozgursarki.shoppinglist.data.local.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,11 +30,12 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun providePlaceRepository(
+    fun provideShoppingRepository(
         shoppingListDao: ShoppingListDAO,
-        shoppingItemDao: ShoppingItemDAO
+        shoppingItemDao: ShoppingItemDAO,
+        defaultPreferences: DefaultPreferences
     ): ShoppingRepository {
-        return ShoppingRepository(shoppingListDao, shoppingItemDao)
+        return ShoppingRepository(shoppingListDao, shoppingItemDao, defaultPreferences)
     }
 
     @Provides
@@ -48,6 +48,20 @@ object DataModule {
     @Singleton
     fun provideListDao(shoppingdb: ShoppingDatabase): ShoppingListDAO {
         return shoppingdb.shoppingListDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(
+        app: Application
+    ): SharedPreferences {
+        return app.getSharedPreferences("shared_pref", Context.MODE_PRIVATE)
+    }
+
+    @Provides
+    @Singleton
+    fun providePreferences(sharedPreferences: SharedPreferences): DefaultPreferences {
+        return DefaultPreferences(sharedPreferences)
     }
 
 }

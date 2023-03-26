@@ -13,7 +13,8 @@ import javax.inject.Inject
 
 class ShoppingRepository @Inject constructor(
     private val shoppingListDAO: ShoppingListDAO,
-    private val shoppingItemDAO: ShoppingItemDAO
+    private val shoppingItemDAO: ShoppingItemDAO,
+    private val defaultPreferences: DefaultPreferences
 ){
     suspend fun insertShoppingList(shoppingList: ShoppingList) {
         shoppingListDAO.insertList(shoppingList.toShoppingListEntity())
@@ -45,5 +46,13 @@ class ShoppingRepository @Inject constructor(
         return shoppingListDAO.getListWithItemsWithoutFlow(listID).map {
             it.toShoppingListItems()
         }
+    }
+
+    fun saveListID(listID: Long) {
+        defaultPreferences.saveListID(listID)
+    }
+
+    fun getListID(): Long {
+        return defaultPreferences.getListID()
     }
 }

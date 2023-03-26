@@ -20,8 +20,6 @@ class HomeScreenViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    lateinit var shoppingList: ShoppingList
-
     private val _uiState: MutableStateFlow<HomeScreenUIState> =
         MutableStateFlow(HomeScreenUIState())
 
@@ -61,18 +59,9 @@ class HomeScreenViewModel @Inject constructor(
     }
 
 
-    fun isListCreated(): Boolean {
-        return if (this::shoppingList.isInitialized) {
-            shoppingList.listID != 0L
-        }else {
-            false
-        }
-
-    }
-
     fun deleteShoppingList() {
         viewModelScope.launch {
-            shoppingListUseCases.deleteRelatedShoppingItems.invoke(shoppingList.listID)
+            shoppingListUseCases.deleteRelatedShoppingItems.invoke(getListID())
         }
     }
 
@@ -80,5 +69,13 @@ class HomeScreenViewModel @Inject constructor(
         viewModelScope.launch {
             shoppingListUseCases.deleteRelatedShoppingItems.invoke(listID)
         }
+    }
+
+    fun saveListID(listID: Long) {
+        shoppingListUseCases.saveListID(listID)
+    }
+
+    fun getListID(): Long {
+        return shoppingListUseCases.getListID()
     }
 }

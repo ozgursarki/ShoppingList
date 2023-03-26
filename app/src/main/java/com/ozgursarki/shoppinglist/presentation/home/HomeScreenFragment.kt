@@ -56,7 +56,7 @@ class HomeScreenFragment : Fragment() {
         binding.addShoppingItemButton.setOnClickListener {
             AddShoppingItemFragment.show(
                 requireActivity().supportFragmentManager,
-                homeScreenViewModel.shoppingList.listID
+                homeScreenViewModel.getListID()
             )
         }
 
@@ -112,13 +112,13 @@ class HomeScreenFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        if (!homeScreenViewModel.isListCreated()) {
+        if (homeScreenViewModel.getListID() == -1L) {
             val date = Calendar.getInstance(DateUtil.LOCALE)
             val shoppingList = ShoppingList(date.timeInMillis)
             homeScreenViewModel.insertShoppingList(shoppingList)
-            homeScreenViewModel.shoppingList = shoppingList
+            homeScreenViewModel.saveListID(shoppingList.listID)
         }
-        homeScreenViewModel.getShoppingListWithItems(homeScreenViewModel.shoppingList.listID)
+        homeScreenViewModel.getShoppingListWithItems(homeScreenViewModel.getListID())
 
     }
 
@@ -142,6 +142,11 @@ class HomeScreenFragment : Fragment() {
             adapter.setShoppingList(shoppingArrayList)
 
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        homeScreenViewModel.saveListID(-1)
     }
 
 }

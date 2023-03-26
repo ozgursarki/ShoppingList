@@ -22,7 +22,9 @@ object DomainModule {
             updateShoppingItem = UpdateShoppingItem(repository),
             deleteRelatedShoppingItems = DeleteRelatedShoppingItems(repository),
             getAllShoppingList = GetAllShoppingList(repository),
-            getAllShoppingItemsWithoutFlow = GetAllShoppingItemsWithoutFlow(repository)
+            getAllShoppingItemsWithoutFlow = GetAllShoppingItemsWithoutFlow(repository),
+            getListID = GetListID(repository),
+            saveListID = SaveListID(repository)
         )
     }
 }
