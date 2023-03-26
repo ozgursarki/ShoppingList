@@ -12,7 +12,6 @@ import com.ozgursarki.shoppinglist.R
 import com.ozgursarki.shoppinglist.databinding.FragmentAddShoppingItemBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.extension.convertToInt
-import com.ozgursarki.shoppinglist.util.DummyData
 import com.ozgursarki.shoppinglist.util.PopUpHelper
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -79,7 +78,7 @@ class AddShoppingItemFragment(
         private const val BOTTOM_SHEET_TAG = "com.ozgursarki.shoppinglist.presentation.home.add.AddShoppingItemFragment"
         fun show(fragmentManager: FragmentManager, listID: Long) {
             val bottomSheet = AddShoppingItemFragment(listID)
-            bottomSheet.setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
+            bottomSheet.setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
             bottomSheet.show(fragmentManager, BOTTOM_SHEET_TAG)
         }
     }

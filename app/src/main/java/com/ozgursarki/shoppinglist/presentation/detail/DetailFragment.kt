@@ -7,13 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.ozgursarki.shoppinglist.R
 import com.ozgursarki.shoppinglist.databinding.FragmentDetailBinding
-import com.ozgursarki.shoppinglist.databinding.FragmentHistoryBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.presentation.adapter.ShoppingListAdapter
 import com.ozgursarki.shoppinglist.presentation.enum.ViewHolderType
-import com.ozgursarki.shoppinglist.presentation.history.HistoryViewModel
 import com.ozgursarki.shoppinglist.util.DateUtil
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +19,7 @@ class DetailFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailBinding
     private lateinit var adapter: ShoppingListAdapter
-    val args: DetailFragmentArgs by navArgs()
+    private val args: DetailFragmentArgs by navArgs()
     private val detailViewModel: DetailViewModel by viewModels()
 
 

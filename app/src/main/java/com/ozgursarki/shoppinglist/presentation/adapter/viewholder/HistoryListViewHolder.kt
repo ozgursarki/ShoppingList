@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.ozgursarki.shoppinglist.databinding.RowHistoryItemBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingList
 import com.ozgursarki.shoppinglist.util.DateUtil
-import java.text.SimpleDateFormat
-import java.util.*
 
 class HistoryListViewHolder(
     private val binding: RowHistoryItemBinding

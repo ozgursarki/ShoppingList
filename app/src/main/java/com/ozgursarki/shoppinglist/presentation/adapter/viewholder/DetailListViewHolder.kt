@@ -3,9 +3,7 @@ package com.ozgursarki.shoppinglist.presentation.adapter.viewholder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.ozgursarki.shoppinglist.databinding.FragmentDetailBinding
 import com.ozgursarki.shoppinglist.databinding.RowDetailItemBinding
-import com.ozgursarki.shoppinglist.databinding.RowShoppingItemBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 
 class DetailListViewHolder(

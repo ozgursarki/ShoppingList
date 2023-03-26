@@ -3,7 +3,6 @@ package com.ozgursarki.shoppinglist.data.local
 import androidx.room.*
 import com.ozgursarki.shoppinglist.data.local.entities.ShoppingListEntity
 import com.ozgursarki.shoppinglist.data.local.entities.relations.ShoppingListWithItemsEntity
-import com.ozgursarki.shoppinglist.domain.model.ShoppingList
 import kotlinx.coroutines.flow.Flow
 
 @Dao

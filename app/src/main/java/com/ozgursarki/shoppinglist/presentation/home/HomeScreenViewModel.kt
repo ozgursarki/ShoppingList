@@ -32,18 +32,18 @@ class HomeScreenViewModel @Inject constructor(
                 .onSuccess {
                     it.collect { shoppingListItems ->
                         _uiState.update { homeScreenUIState ->
-                            val shoppingItems = shoppingListItems.map {
-                                it.toShoppingListItems()
+                            val shoppingItems = shoppingListItems.map { shoppingList ->
+                                shoppingList.toShoppingListItems()
                             }
 
-                            homeScreenUIState.copy(shoppingList = shoppingItems[0].shoppingItemList, true)
+                            homeScreenUIState.copy(shoppingList = shoppingItems[0].shoppingItemList, hasError = true)
 
                         }
                     }
                 }
                 .onFailure {
                     _uiState.update { homeScreenUIState ->
-                        homeScreenUIState.copy(listOf(), false)
+                        homeScreenUIState.copy(shoppingList = listOf(), hasError = false)
                     }
                 }
 

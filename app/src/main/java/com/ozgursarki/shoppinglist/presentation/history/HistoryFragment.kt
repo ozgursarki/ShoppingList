@@ -38,7 +38,7 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        historyListAdapter = HistoryListAdapter() {
+        historyListAdapter = HistoryListAdapter {
             val action = HistoryFragmentDirections.actionHistoryFragmentToDetailFragment(it)
             findNavController().navigate(action)
         }
@@ -81,12 +81,6 @@ class HistoryFragment : Fragment() {
         }
 
         historyViewModel.shoppingList.observe(viewLifecycleOwner) { shoppingListFromDatabase ->
-            /*val shoppingArrayList = arrayListOf<ShoppingList>()
-            shoppingListFromDatabase.forEach {
-                Log.e("asşklaöfşas",it.toString())
-                shoppingArrayList.add(it)
-            }
-            adapter.setHistoryShoppingList(shoppingArrayList)*/
             handleShoppingList(shoppingListFromDatabase)
         }
 
