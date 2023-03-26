@@ -35,8 +35,13 @@ class HomeScreenViewModel @Inject constructor(
                             val shoppingItems = shoppingListItems.map { shoppingList ->
                                 shoppingList.toShoppingListItems()
                             }
+                            val shoppingItemList = try {
+                                shoppingItems[0].shoppingItemList
+                            } catch (e: Exception) {
+                                arrayListOf<ShoppingItem>()
+                            }
 
-                            homeScreenUIState.copy(shoppingList = shoppingItems[0].shoppingItemList, hasError = true)
+                            homeScreenUIState.copy(shoppingList = shoppingItemList, hasError = true)
 
                         }
                     }
@@ -63,10 +68,9 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
-
     fun deleteShoppingList() {
         viewModelScope.launch {
-            shoppingListUseCases.deleteRelatedShoppingItem.invoke(getListID())
+            shoppingListUseCases.deleteShoppingList.invoke(getListID())
         }
     }
 
