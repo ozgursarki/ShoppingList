@@ -9,7 +9,7 @@ import com.ozgursarki.shoppinglist.data.local.entities.ShoppingItemEntity
 import com.ozgursarki.shoppinglist.data.local.entities.ShoppingListEntity
 
 @Database(entities = [ShoppingListEntity::class, ShoppingItemEntity::class], version = 1)
-@TypeConverters(Converters::class)
+//@TypeConverters(Converters::class)
 abstract class ShoppingDatabase : RoomDatabase() {
     abstract fun shoppingListDao(): ShoppingListDAO
     abstract fun shoppingItemDao(): ShoppingItemDAO

@@ -12,8 +12,10 @@ import com.ozgursarki.shoppinglist.R
 import com.ozgursarki.shoppinglist.databinding.FragmentAddShoppingItemBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.extension.convertToInt
+import com.ozgursarki.shoppinglist.util.DateUtil
 import com.ozgursarki.shoppinglist.util.PopUpHelper
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Calendar
 
 
 @AndroidEntryPoint
@@ -63,7 +65,8 @@ class AddShoppingItemFragment(
                 val item = ShoppingItem(
                     name = binding.shoppingItemName.text.toString(),
                     count = countText.text.convertToInt(),
-                    listID = listID
+                    listID = listID,
+                    date = DateUtil.getDateInTurkishWithoutHour(Calendar.getInstance().timeInMillis)
                 )
                 addShoppingItemViewModel.insertShoppingItem(item)
             } else {

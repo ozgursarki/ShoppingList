@@ -23,6 +23,7 @@ class ShoppingListViewHolder(
         binding.apply {
             groceryName.text = shoppingItem.name
             countText.text = shoppingItem.count.toString()
+            date.text = shoppingItem.date
         }
 
         binding.minusButton.setOnClickListener {

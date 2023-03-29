@@ -7,6 +7,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ozgursarki.shoppinglist.R
 
 object PopUpHelper {
+
     fun showErrorPopUp(errorMessage: String, context: Context) {
         val builder = MaterialAlertDialogBuilder(context, R.style.MyDialogTheme)
         builder.setTitle("HATA!")

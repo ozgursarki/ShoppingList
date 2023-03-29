@@ -41,14 +41,14 @@ class HomeScreenViewModel @Inject constructor(
                                 arrayListOf<ShoppingItem>()
                             }
 
-                            homeScreenUIState.copy(shoppingList = shoppingItemList, hasError = true)
+                            homeScreenUIState.copy(shoppingList = shoppingItemList, hasError = false)
 
                         }
                     }
                 }
                 .onFailure {
                     _uiState.update { homeScreenUIState ->
-                        homeScreenUIState.copy(shoppingList = listOf(), hasError = false)
+                        homeScreenUIState.copy(shoppingList = listOf(), hasError = true)
                     }
                 }
 

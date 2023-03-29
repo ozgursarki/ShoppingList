@@ -14,5 +14,13 @@ class DateUtil {
             calendar.timeInMillis = milliSeconds
             return formatter.format(calendar.time)
         }
+
+        fun getDateInTurkishWithoutHour(milliSeconds: Long): String {
+            val formatter = SimpleDateFormat("EEE, d MMM yyyy ", Locale("tr"))
+
+            val calendar = Calendar.getInstance()
+            calendar.timeInMillis = milliSeconds
+            return formatter.format(calendar.time)
+        }
     }
 }
