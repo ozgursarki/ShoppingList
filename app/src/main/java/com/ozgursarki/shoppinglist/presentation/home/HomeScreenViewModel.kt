@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.ozgursarki.shoppinglist.data.mapper.toShoppingListItems
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.domain.model.ShoppingList
+import com.ozgursarki.shoppinglist.domain.usecase.DeleteShoppingList
 import com.ozgursarki.shoppinglist.domain.usecase.ShoppingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,6 +27,7 @@ class HomeScreenViewModel @Inject constructor(
     val uiState: StateFlow<HomeScreenUIState>
         get() = _uiState.asStateFlow()
 
+    /*
     fun getShoppingListWithItems(listID: Long) {
         viewModelScope.launch {
             shoppingListUseCases.getShoppingListWithItems.invoke(listID)
@@ -54,6 +56,7 @@ class HomeScreenViewModel @Inject constructor(
 
         }
     }
+     */
 
 
     fun insertShoppingList(shoppingList: ShoppingList) {
@@ -87,4 +90,31 @@ class HomeScreenViewModel @Inject constructor(
     fun getListID(): Long {
         return shoppingListUseCases.getListID()
     }
-}
+
+    fun getShoppingListWithItems(listID: Long) {
+        viewModelScope.launch {
+            shoppingListUseCases.fiterListByItemType.invoke(listID)
+            .onSuccess {
+                it.collect { shoppingListItems ->
+                    _uiState.update { homeScreenUIState ->
+                        val shoppingItems = shoppingListItems.map { shoppingList ->
+                            shoppingList.toShoppingListItems()
+                        }
+                        val shoppingItemList = try {
+                            shoppingItems[0].shoppingItemList
+                        } catch (e: Exception) {
+                            arrayListOf<ShoppingItem>()
+                        }
+
+                        homeScreenUIState.copy(shoppingList = shoppingItemList, hasError = false)
+
+                    }
+                }
+            }
+            .onFailure {
+                _uiState.update { homeScreenUIState ->
+                    homeScreenUIState.copy(shoppingList = listOf(), hasError = true)
+                }
+            }
+    }
+}}
