@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.ozgursarki.shoppinglist.R
 import com.ozgursarki.shoppinglist.databinding.FragmentHomeScreenBinding
+import com.ozgursarki.shoppinglist.domain.model.ShoppingHeader
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.domain.model.ShoppingList
 import com.ozgursarki.shoppinglist.presentation.adapter.ShoppingListAdapter
@@ -64,21 +65,25 @@ class HomeScreenFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val shoppingList = mutableListOf<ShoppingItem>()
-                adapter.getShoppingList().toMutableList().map { shoppingListFromAdapter ->
-                    val localeShoppingList = shoppingListFromAdapter.copy()
+                adapter.getShoppingList().toMutableList().map { shoppingListFromAdapter  ->
+                    val localeShoppingList = (shoppingListFromAdapter as ShoppingItem).copy()
                     shoppingList.add(localeShoppingList)
                 }
-
-                (viewHolder as ShoppingListViewHolder).getShoppingItem()
-                    ?.let {
-                        homeScreenViewModel.deleteShoppingItemsFromDatabase(it.itemID)
+                when (viewHolder) {
+                    is ShoppingListViewHolder -> {
+                        viewHolder.getShoppingItem()
+                            ?.let {
+                                homeScreenViewModel.deleteShoppingItemsFromDatabase(it.itemID)
+                            }
+                        shoppingList.removeAt(position)
+                        val newArraylist = arrayListOf<Any>()
+                        shoppingList.forEach {
+                            newArraylist.add(it)
+                        }
+                        adapter.setShoppingList(newArraylist)
                     }
-                shoppingList.removeAt(position)
-                val newArraylist = arrayListOf<ShoppingItem>()
-                shoppingList.forEach {
-                    newArraylist.add(it)
                 }
-                adapter.setShoppingList(newArraylist)
+
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeGesture)
@@ -128,11 +133,16 @@ class HomeScreenFragment : Fragment() {
     }
 
     private fun handleHomeUIState(homeScreenUiState: HomeScreenUIState) {
-        val shoppingArrayList = arrayListOf<ShoppingItem>()
+        val shoppingArrayList = arrayListOf<Any>()
         homeScreenUiState.shoppingList.forEach {
-            shoppingArrayList.add(it.copy()) //reference bug fixed
+            if (it is ShoppingItem) {
+                shoppingArrayList.add(it.copy()) //reference bug fixed
+            }else {
+                shoppingArrayList.add(ShoppingHeader((it as ShoppingHeader).title))
+            }
+
         }
-        if (shoppingArrayList.isEmpty()) {
+        if (homeScreenUiState.shoppingList.isEmpty()) {
             binding.apply {
                 shoppingListRV.visibility = View.GONE
                 viewNoData.visibility = View.VISIBLE

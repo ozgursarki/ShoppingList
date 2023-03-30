@@ -11,5 +11,5 @@ data class ShoppingUseCase(
     val deleteShoppingList: DeleteShoppingList,
     val getListID: GetListID,
     val saveListID: SaveListID,
-    val fiterListByItemType: FilterListByItemType
+    val filterListByItemType: FilterListByItemType
 )

@@ -1,5 +1,5 @@
 package com.ozgursarki.shoppinglist.presentation.enum
 
 enum class ViewHolderType {
-    DETAIL_VIEWHOLDER, SHOPPING_VIEWHOLDER
+    DETAIL_VIEWHOLDER, SHOPPING_VIEWHOLDER, HEADER_VIEWHOLDER
 }

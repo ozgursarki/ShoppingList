@@ -43,7 +43,7 @@ class DetailFragment : Fragment() {
         binding.toolBar.title = DateUtil.getDateInTurkish(shoppingList.listID)
 
         detailViewModel.shoppingList.observe(viewLifecycleOwner) { shoppingListFromDatabase ->
-            val shoppingArrayList = arrayListOf<ShoppingItem>()
+            val shoppingArrayList = arrayListOf<Any>()
             shoppingListFromDatabase.forEach {
                 shoppingArrayList.add(it.copy())
             }

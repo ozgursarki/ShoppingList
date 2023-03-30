@@ -26,7 +26,7 @@ object DomainModule {
             deleteShoppingList = DeleteShoppingList(repository),
             getListID = GetListID(repository),
             saveListID = SaveListID(repository),
-            fiterListByItemType = FilterListByItemType(repository)
+            filterListByItemType = FilterListByItemType()
         )
     }
 }
