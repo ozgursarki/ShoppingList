@@ -21,6 +21,7 @@ fun ShoppingItem.toShoppingItemEntity(): ShoppingItemEntity {
         name,
         count,
         date,
+        type,
         listID
     )
 }
@@ -31,7 +32,8 @@ fun ShoppingItemEntity.toShoppingItem(): ShoppingItem {
         name,
         count,
         listID,
-        date
+        date,
+        type
     )
 }
 

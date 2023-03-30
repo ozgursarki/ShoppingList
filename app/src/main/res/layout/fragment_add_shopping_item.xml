@@ -11,6 +11,8 @@
     app:layout_behavior="@string/bottom_sheet_behavior">
 
 
+
+
     <TextView
         android:id="@+id/title_text"
         android:layout_width="wrap_content"
@@ -25,6 +27,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Spinner
+        android:id="@+id/bottom_sheet_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/minusButton"
+        app:layout_constraintTop_toBottomOf="@id/title_text"
+        android:layout_marginTop="10dp"/>
+
     <EditText
         android:id="@+id/shoppingItemName"
         android:layout_width="0dp"
@@ -38,7 +49,7 @@
         app:layout_constraintBottom_toBottomOf="@id/minusButton"
         app:layout_constraintEnd_toStartOf="@+id/minusButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_text"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_spinner"
         app:layout_constraintTop_toTopOf="@id/minusButton" />
 
     <Button

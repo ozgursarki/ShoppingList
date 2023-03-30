@@ -1,6 +1,5 @@
 package com.ozgursarki.shoppinglist.domain.model
 
-import java.util.Calendar
 
 
 data class ShoppingItem(
@@ -8,5 +7,6 @@ data class ShoppingItem(
     val name: String,
     var count: Int,
     val listID: Long,
-    val date: String
+    val date: String,
+    val type: String
 )

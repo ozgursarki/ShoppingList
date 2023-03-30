@@ -15,4 +15,11 @@
     <string name="enter_shopping_item_name">Enter Shopping Item Name</string>
     <string name="add_item">Add Item</string>
     <string name="_1">1</string>
+    <string-array name="item_type_array">
+        <item>Fruit</item>
+        <item>Vegetables</item>
+        <item>Breakfast</item>
+        <item>Snack</item>
+        <item>Other</item>
+    </string-array>
 </resources>
