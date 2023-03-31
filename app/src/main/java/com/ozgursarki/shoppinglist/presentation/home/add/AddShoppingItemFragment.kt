@@ -93,6 +93,7 @@ class AddShoppingItemFragment(
                     addShoppingItemViewModel.updateShoppingItem(shoppingItem.copy(count = binding.countText.text.convertToInt() + shoppingItem.count))
                 }
             }
+            this.dismiss()
         }
     }
 

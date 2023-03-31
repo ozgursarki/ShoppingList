@@ -81,7 +81,7 @@ class HomeScreenFragment : Fragment() {
                     is ShoppingListViewHolder -> {
                         viewHolder.getShoppingItem()
                             ?.let {
-                                homeScreenViewModel.deleteShoppingItemsFromDatabase(it.itemID)
+                                homeScreenViewModel.deleteShoppingItemFromDatabase(it.itemID)
                             }
                         shoppingList.removeAt(position)
                         val newArraylist = arrayListOf<Any>()
@@ -121,8 +121,7 @@ class HomeScreenFragment : Fragment() {
         }
 
         binding.toolBar.findViewById<ActionMenuItemView>(R.id.delete).setOnClickListener {
-            adapter.setShoppingList(arrayListOf())
-            homeScreenViewModel.deleteShoppingList()
+            homeScreenViewModel.deleteShoppingItemsFromDatabase(homeScreenViewModel.getListID())
             print("sadasda")
         }
 

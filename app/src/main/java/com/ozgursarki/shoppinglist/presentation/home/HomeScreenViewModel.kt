@@ -77,9 +77,15 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
-    fun deleteShoppingItemsFromDatabase(itemID: Long) {
+    fun deleteShoppingItemFromDatabase(itemID: Long) {
         viewModelScope.launch {
             shoppingListUseCases.deleteRelatedShoppingItem.invoke(itemID)
+        }
+    }
+
+    fun deleteShoppingItemsFromDatabase(itemID: Long) {
+        viewModelScope.launch {
+            shoppingListUseCases.deleteRelatedShoppingItems.invoke(itemID)
         }
     }
 

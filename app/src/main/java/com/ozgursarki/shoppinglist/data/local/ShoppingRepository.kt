@@ -58,6 +58,10 @@ class ShoppingRepository @Inject constructor(
         shoppingListDAO.deleteShoppingList(listID)
     }
 
+    suspend fun deleteShoppingListItems(listID: Long) {
+        shoppingItemDAO.deleteRelatedShoppingItems(listID)
+    }
+
     fun saveListID(listID: Long) {
         defaultPreferences.saveListID(listID)
     }
