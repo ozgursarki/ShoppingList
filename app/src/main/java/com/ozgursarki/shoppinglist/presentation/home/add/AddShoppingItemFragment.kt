@@ -106,7 +106,24 @@ class AddShoppingItemFragment(
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        when(position) {
+            0 -> {
+                view?.setBackgroundResource(R.color.BabyBlue)
+            }
+            1 -> {
+                view?.setBackgroundResource(R.color.LightGreen)
+            }
+            2 -> {
+                view?.setBackgroundResource(R.color.RedPink)
+            }
+            3 -> {
+                view?.setBackgroundResource(R.color.RedOrange)
+            }
+            4 -> {
+                view?.setBackgroundResource(R.color.Violet)
+            }
 
+        }
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {

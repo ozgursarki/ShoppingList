@@ -21,6 +21,7 @@ import com.ozgursarki.shoppinglist.domain.model.ShoppingHeader
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.domain.model.ShoppingList
 import com.ozgursarki.shoppinglist.presentation.adapter.ShoppingListAdapter
+import com.ozgursarki.shoppinglist.presentation.adapter.viewholder.HeaderViewHolder
 import com.ozgursarki.shoppinglist.presentation.adapter.viewholder.ShoppingListViewHolder
 import com.ozgursarki.shoppinglist.presentation.enum.ViewHolderType
 import com.ozgursarki.shoppinglist.util.DateUtil
@@ -46,6 +47,7 @@ class HomeScreenFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -63,11 +65,17 @@ class HomeScreenFragment : Fragment() {
 
         val swipeGesture = object: SwipeToDeleteCallback() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                if (viewHolder is HeaderViewHolder) {
+                    return
+                }
                 val position = viewHolder.adapterPosition
-                val shoppingList = mutableListOf<ShoppingItem>()
-                adapter.getShoppingList().toMutableList().map { shoppingListFromAdapter  ->
-                    val localeShoppingList = (shoppingListFromAdapter as ShoppingItem).copy()
-                    shoppingList.add(localeShoppingList)
+                val shoppingList = mutableListOf<Any>()
+                adapter.getShoppingList().toMutableList().map { shoppingListFromAdapter ->
+                    if (shoppingListFromAdapter is ShoppingHeader) {
+                        shoppingList.add(ShoppingHeader((shoppingListFromAdapter as ShoppingHeader).title))
+                    } else {
+                        shoppingList.add((shoppingListFromAdapter as ShoppingItem).copy())
+                    }
                 }
                 when (viewHolder) {
                     is ShoppingListViewHolder -> {
@@ -115,6 +123,7 @@ class HomeScreenFragment : Fragment() {
         binding.toolBar.findViewById<ActionMenuItemView>(R.id.delete).setOnClickListener {
             adapter.setShoppingList(arrayListOf())
             homeScreenViewModel.deleteShoppingList()
+            print("sadasda")
         }
 
     }
@@ -159,9 +168,5 @@ class HomeScreenFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        homeScreenViewModel.saveListID(-1)
-    }
 
 }
