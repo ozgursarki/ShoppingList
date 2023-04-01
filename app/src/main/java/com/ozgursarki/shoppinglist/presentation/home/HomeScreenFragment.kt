@@ -110,6 +110,7 @@ class HomeScreenFragment : Fragment() {
         binding.toolBar.findViewById<ActionMenuItemView>(R.id.save).setOnClickListener {
             if (!adapter.isListEmpty()) {
                 findNavController().navigate(R.id.action_homeScreenFragment_to_historyFragment)
+                homeScreenViewModel.saveListID(-1L)
             } else {
                 PopUpHelper.showErrorPopUp(requireActivity().getString(R.string.error_empty_list), requireContext())
             }
@@ -122,7 +123,6 @@ class HomeScreenFragment : Fragment() {
 
         binding.toolBar.findViewById<ActionMenuItemView>(R.id.delete).setOnClickListener {
             homeScreenViewModel.deleteShoppingItemsFromDatabase(homeScreenViewModel.getListID())
-            print("sadasda")
         }
 
     }
@@ -150,7 +150,13 @@ class HomeScreenFragment : Fragment() {
             }
 
         }
-        if (homeScreenUiState.shoppingList.isEmpty()) {
+        var check = false
+        homeScreenUiState.shoppingList.forEach {
+            if (it is ShoppingItem) {
+                check = true
+            }
+        }
+        if (!check) {
             binding.apply {
                 shoppingListRV.visibility = View.GONE
                 viewNoData.visibility = View.VISIBLE
