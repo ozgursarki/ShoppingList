@@ -22,6 +22,9 @@ class ShoppingListAdapter(
             TYPE_SHOPPING_ITEM -> {
                 ShoppingListViewHolder.create(parent)
             }
+            TYPE_SHOPPING_DETAIL -> {
+                DetailListViewHolder.create(parent)
+            }
             else -> ShoppingListViewHolder.create(parent)
         }
 
@@ -30,13 +33,20 @@ class ShoppingListAdapter(
     companion object {
         private const val TYPE_SHOPPING_ITEM = 3
         private const val TYPE_SHOPPING_HEADER = 4
+        private const val TYPE_SHOPPING_DETAIL = 5
     }
 
     override fun getItemViewType(position: Int): Int {
 
 
         return when (shoppingItemList[position]) {
-            is ShoppingItem -> TYPE_SHOPPING_ITEM
+            is ShoppingItem -> {
+                if (viewHolderType != ViewHolderType.DETAIL_VIEWHOLDER) {
+                    TYPE_SHOPPING_ITEM
+                }else {
+                    TYPE_SHOPPING_DETAIL
+                }
+            }
             is ShoppingHeader -> TYPE_SHOPPING_HEADER
             else -> TYPE_SHOPPING_ITEM
         }
@@ -51,6 +61,9 @@ class ShoppingListAdapter(
             }
             is HeaderViewHolder -> {
                 holder.bind(shoppingItemList[position] as ShoppingHeader)
+            }
+            is DetailListViewHolder -> {
+                holder.bind(shoppingItemList[position] as ShoppingItem)
             }
         }
 

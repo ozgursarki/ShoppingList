@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.domain.usecase.ShoppingUseCase
+import com.ozgursarki.shoppinglist.util.ListHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -15,14 +16,21 @@ class DetailViewModel @Inject constructor(
     private val useCase: ShoppingUseCase
 ) : ViewModel() {
 
-    private val _shoppingList: MutableLiveData<List<ShoppingItem>> = MutableLiveData(listOf())
-    val shoppingList: LiveData<List<ShoppingItem>>
+    private val _shoppingList: MutableLiveData<List<Any>> = MutableLiveData(listOf())
+    val shoppingList: LiveData<List<Any>>
         get() = _shoppingList
 
     fun getShoppingListWithItems(listID: Long) {
         viewModelScope.launch {
             val shoppingListFromDatabase = useCase.getAllShoppingItemsWithoutFlow.invoke(listID)
-            _shoppingList.value = shoppingListFromDatabase[0].shoppingItemList
+            filterShoppingList(ListHelper.convertToList(shoppingListFromDatabase[0].shoppingItemList))
+        }
+    }
+
+    fun filterShoppingList(shoppingList: ArrayList<ShoppingItem>) {
+        viewModelScope.launch {
+            val filteredList = useCase.filterListByItemType.invoke(shoppingList)
+            _shoppingList.value = filteredList
         }
     }
 }
