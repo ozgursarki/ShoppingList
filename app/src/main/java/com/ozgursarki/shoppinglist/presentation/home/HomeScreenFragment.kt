@@ -51,9 +51,11 @@ class HomeScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ShoppingListAdapter(viewHolderType = ViewHolderType.SHOPPING_VIEWHOLDER) {
+        adapter = ShoppingListAdapter(viewHolderType = ViewHolderType.SHOPPING_VIEWHOLDER, buttonCallback = {
             homeScreenViewModel.updateShoppingItem(it)
-        }
+            }, shoppingHeaderCallBack = {
+                homeScreenViewModel.removeRelatedItems(it)
+        })
         binding.shoppingListRV.adapter = adapter
 
         binding.addShoppingItemButton.setOnClickListener {

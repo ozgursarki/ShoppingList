@@ -1,6 +1,6 @@
 package com.ozgursarki.shoppinglist.domain.model
 
-@JvmInline
-value class ShoppingHeader(
-    val title: String
+data class ShoppingHeader(
+    val title: String,
+    val isExpanded: Boolean = false
 )

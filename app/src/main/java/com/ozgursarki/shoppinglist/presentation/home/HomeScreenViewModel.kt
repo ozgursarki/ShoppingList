@@ -3,6 +3,7 @@ package com.ozgursarki.shoppinglist.presentation.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ozgursarki.shoppinglist.data.mapper.toShoppingListItems
+import com.ozgursarki.shoppinglist.domain.model.ShoppingHeader
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.domain.model.ShoppingList
 import com.ozgursarki.shoppinglist.domain.usecase.ShoppingUseCase
@@ -33,14 +34,14 @@ class HomeScreenViewModel @Inject constructor(
                 .onSuccess {
                     it.collect { shoppingListItems ->
 
-                            val shoppingItems = shoppingListItems.map { shoppingList ->
-                                shoppingList.toShoppingListItems()
-                            }
-                            val shoppingItemList = try {
-                                shoppingItems[0].shoppingItemList
-                            } catch (e: Exception) {
-                                arrayListOf<ShoppingItem>()
-                            }
+                        val shoppingItems = shoppingListItems.map { shoppingList ->
+                            shoppingList.toShoppingListItems()
+                        }
+                        val shoppingItemList = try {
+                            shoppingItems[0].shoppingItemList
+                        } catch (e: Exception) {
+                            arrayListOf<ShoppingItem>()
+                        }
 
 
                         val arrayList = arrayListOf<ShoppingItem>()
@@ -56,7 +57,6 @@ class HomeScreenViewModel @Inject constructor(
 
         }
     }
-
 
 
     fun insertShoppingList(shoppingList: ShoppingList) {
@@ -106,5 +106,20 @@ class HomeScreenViewModel @Inject constructor(
                 it.copy(shoppingList = filteredList, hasError = false)
             }
 
+        }
     }
-}}
+    fun removeRelatedItems(shoppingHeader: ShoppingHeader) {
+
+        val arrayList = arrayListOf<Any>()
+        _uiState.value.shoppingList.forEach{
+            if(it is ShoppingItem && it.type.equals(shoppingHeader.title, ignoreCase = true)) {
+            }else {
+                arrayList.add(it)
+            }
+        }
+        _uiState.update {
+            it.copy(arrayList,false)
+        }
+    }
+
+}
