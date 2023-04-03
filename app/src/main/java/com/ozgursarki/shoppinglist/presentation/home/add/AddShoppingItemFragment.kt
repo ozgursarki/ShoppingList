@@ -8,6 +8,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.core.graphics.ColorUtils
+import androidx.core.graphics.alpha
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -110,18 +112,55 @@ class AddShoppingItemFragment(
         when(position) {
             0 -> {
                 view?.setBackgroundResource(R.color.BabyBlue)
+                binding.titleText.setBackgroundResource(R.color.BabyBlue)
+                binding.bottomSheetConstrain.setBackgroundResource(R.color.BabyBlue)
+                binding.minusButton.setBackgroundResource(R.color.BabyBlue)
+                binding.plusButton.setBackgroundResource(R.color.BabyBlue)
+                binding.countText.setBackgroundResource(R.color.BabyBlue)
+                binding.shoppingItemName.setBackgroundResource(R.color.BabyBlue)
+                binding.addButton.setBackgroundResource(R.color.BabyBlue)
+
             }
             1 -> {
                 view?.setBackgroundResource(R.color.LightGreen)
+                binding.titleText.setBackgroundResource(R.color.LightGreen)
+                binding.bottomSheetConstrain.setBackgroundResource(R.color.LightGreen)
+                binding.minusButton.setBackgroundResource(R.color.LightGreen)
+                binding.plusButton.setBackgroundResource(R.color.LightGreen)
+                binding.countText.setBackgroundResource(R.color.LightGreen)
+                binding.shoppingItemName.setBackgroundResource(R.color.LightGreen)
+                binding.addButton.setBackgroundResource(R.color.LightGreen)
+
             }
             2 -> {
                 view?.setBackgroundResource(R.color.RedPink)
+                binding.titleText.setBackgroundResource(R.color.RedPink)
+                binding.bottomSheetConstrain.setBackgroundResource(R.color.RedPink)
+                binding.minusButton.setBackgroundResource(R.color.RedPink)
+                binding.plusButton.setBackgroundResource(R.color.RedPink)
+                binding.countText.setBackgroundResource(R.color.RedPink)
+                binding.shoppingItemName.setBackgroundResource(R.color.RedPink)
+                binding.addButton.setBackgroundResource(R.color.RedPink)
             }
             3 -> {
                 view?.setBackgroundResource(R.color.RedOrange)
+                binding.titleText.setBackgroundResource(R.color.RedOrange)
+                binding.bottomSheetConstrain.setBackgroundResource(R.color.RedOrange)
+                binding.minusButton.setBackgroundResource(R.color.RedOrange)
+                binding.plusButton.setBackgroundResource(R.color.RedOrange)
+                binding.countText.setBackgroundResource(R.color.RedOrange)
+                binding.shoppingItemName.setBackgroundResource(R.color.RedOrange)
+                binding.addButton.setBackgroundResource(R.color.RedOrange)
             }
             4 -> {
                 view?.setBackgroundResource(R.color.Violet)
+                binding.titleText.setBackgroundResource(R.color.Violet)
+                binding.bottomSheetConstrain.setBackgroundResource(R.color.Violet)
+                binding.minusButton.setBackgroundResource(R.color.Violet)
+                binding.plusButton.setBackgroundResource(R.color.Violet)
+                binding.countText.setBackgroundResource(R.color.Violet)
+                binding.shoppingItemName.setBackgroundResource(R.color.Violet)
+                binding.addButton.setBackgroundResource(R.color.Violet)
             }
 
         }

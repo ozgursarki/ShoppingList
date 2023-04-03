@@ -10,7 +10,7 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/neon_purple"
+        android:backgroundTint="@color/RedPink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,7 +22,7 @@
             android:layout_height="?attr/actionBarSize"
             app:titleTextColor="@color/white"
             app:menu="@menu/toolbar_menu"
-            app:title="NEON APPS" />
+            app:title="SHOPPING LIST" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView

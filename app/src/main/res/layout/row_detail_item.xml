@@ -8,6 +8,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
+        android:id="@+id/itemNameRoot"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_weight="1"
@@ -29,6 +30,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
+        android:id="@+id/itemCountRoot"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_weight="4"
