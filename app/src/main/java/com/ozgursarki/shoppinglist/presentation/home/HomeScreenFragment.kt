@@ -21,12 +21,14 @@ import com.ozgursarki.shoppinglist.domain.model.ShoppingHeader
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.domain.model.ShoppingList
 import com.ozgursarki.shoppinglist.presentation.adapter.ShoppingListAdapter
+import com.ozgursarki.shoppinglist.presentation.adapter.viewholder.DetailListViewHolder
 import com.ozgursarki.shoppinglist.presentation.adapter.viewholder.HeaderViewHolder
 import com.ozgursarki.shoppinglist.presentation.adapter.viewholder.ShoppingListViewHolder
 import com.ozgursarki.shoppinglist.presentation.enum.ViewHolderType
 import com.ozgursarki.shoppinglist.util.DateUtil
 import com.ozgursarki.shoppinglist.util.PopUpHelper
 import com.ozgursarki.shoppinglist.util.SwipeToDeleteCallback
+import com.ozgursarki.shoppinglist.util.UseCaseHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.Calendar
@@ -85,6 +87,20 @@ class HomeScreenFragment : Fragment() {
                             ?.let {
                                 homeScreenViewModel.deleteShoppingItemFromDatabase(it.itemID)
                             }
+
+                        shoppingList.removeAt(position)
+                        val newArraylist = arrayListOf<Any>()
+                        shoppingList.forEach {
+                            newArraylist.add(it)
+                        }
+                        adapter.setShoppingList(newArraylist)
+                    }
+                    is DetailListViewHolder -> {
+                        viewHolder.getShoppingItem()
+                            ?.let {
+                                homeScreenViewModel.deleteShoppingItemFromDatabase(it.itemID)
+                            }
+
                         shoppingList.removeAt(position)
                         val newArraylist = arrayListOf<Any>()
                         shoppingList.forEach {
