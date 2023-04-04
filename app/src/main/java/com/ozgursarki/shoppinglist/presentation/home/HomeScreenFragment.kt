@@ -146,6 +146,8 @@ class HomeScreenFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        binding.animationView.visibility = View.VISIBLE
+
         if (!homeScreenViewModel.getAdd()) {
             BalloonHelper.createToolTip(
                 requireContext(),
@@ -166,8 +168,17 @@ class HomeScreenFragment : Fragment() {
             val shoppingList = ShoppingList(date.timeInMillis)
             homeScreenViewModel.insertShoppingList(shoppingList)
             homeScreenViewModel.saveListID(shoppingList.listID)
+            homeScreenViewModel.getShoppingListWithItems(homeScreenViewModel.getListID()) {
+                binding.animationView.visibility = View.VISIBLE
+            }
+        }else {
+            homeScreenViewModel.insertShoppingList(ShoppingList(homeScreenViewModel.getListID()))
+            homeScreenViewModel.getShoppingListWithItems(homeScreenViewModel.getListID()) {
+                binding.animationView.visibility = View.VISIBLE
+            }
         }
-        homeScreenViewModel.getShoppingListWithItems(homeScreenViewModel.getListID())
+
+
 
     }
 
@@ -194,6 +205,7 @@ class HomeScreenFragment : Fragment() {
                 toolBar.findViewById<ActionMenuItemView>(R.id.delete).visibility = View.GONE
             }
         }else {
+            binding.animationView.visibility = View.GONE
             binding.apply {
                 shoppingListRV.visibility = View.VISIBLE
                 viewNoData.visibility = View.GONE

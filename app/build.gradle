@@ -78,4 +78,7 @@ dependencies {
 
     //balloon
     implementation "com.github.skydoves:balloon:$versions.balloon_version"
+
+    //lottie
+    implementation "com.airbnb.android:lottie:$versions.lottie_version"
 }

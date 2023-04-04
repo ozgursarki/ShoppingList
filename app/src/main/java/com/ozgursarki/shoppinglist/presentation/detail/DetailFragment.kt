@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.ozgursarki.shoppinglist.databinding.FragmentDetailBinding
-import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.presentation.adapter.ShoppingListAdapter
 import com.ozgursarki.shoppinglist.presentation.enum.ViewHolderType
 import com.ozgursarki.shoppinglist.util.DateUtil
@@ -41,7 +40,7 @@ class DetailFragment : Fragment() {
         binding.detailRV.adapter = adapter
 
         val shoppingList = args.shoppingList
-        binding.toolBar.title = DateUtil.getDateInTurkish(shoppingList.listID)
+        binding.toolBar.title = DateUtil.getDate(shoppingList.listID)
 
         detailViewModel.shoppingList.observe(viewLifecycleOwner) { shoppingListFromDatabase ->
             adapter.setShoppingList(ListHelper.convertToList(shoppingListFromDatabase))

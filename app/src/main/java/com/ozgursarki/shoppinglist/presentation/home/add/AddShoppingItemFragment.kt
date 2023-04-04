@@ -8,8 +8,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
-import androidx.core.graphics.ColorUtils
-import androidx.core.graphics.alpha
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -86,7 +84,7 @@ class AddShoppingItemFragment(
                     name = binding.shoppingItemName.text.toString(),
                     count = countText.text.convertToInt(),
                     listID = listID,
-                    date = DateUtil.getDateInTurkishWithoutHour(Calendar.getInstance().timeInMillis),
+                    date = DateUtil.getDateWithoutHour(Calendar.getInstance().timeInMillis),
                     type = spinner.selectedItem.toString()
                 )
                 addShoppingItemViewModel.insertShoppingItem(item)

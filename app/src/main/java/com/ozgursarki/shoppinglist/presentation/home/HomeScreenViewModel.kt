@@ -8,6 +8,7 @@ import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.domain.model.ShoppingList
 import com.ozgursarki.shoppinglist.domain.usecase.ShoppingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -28,12 +29,14 @@ class HomeScreenViewModel @Inject constructor(
         get() = _uiState.asStateFlow()
 
 
-    fun getShoppingListWithItems(listID: Long) {
+    fun getShoppingListWithItems(listID: Long, newItem: () -> Unit) {
         viewModelScope.launch {
             shoppingListUseCases.getShoppingListWithItems.invoke(listID)
                 .onSuccess {
                     it.collect { shoppingListItems ->
 
+                        newItem.invoke()
+                        delay(2000)
                         val shoppingItems = shoppingListItems.map { shoppingList ->
                             shoppingList.toShoppingListItems()
                         }
