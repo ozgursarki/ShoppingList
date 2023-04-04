@@ -97,6 +97,38 @@ class HomeScreenViewModel @Inject constructor(
         return shoppingListUseCases.getListID()
     }
 
+    fun saveDelete() {
+        shoppingListUseCases.saveDeleteToolTip.saveDeleteToolTip()
+    }
+
+    fun getDelete(): Boolean {
+        return shoppingListUseCases.getDeleteToolTip.getDeleteToopTip()
+    }
+
+    fun saveSave() {
+        shoppingListUseCases.saveSaveToolTip.saveSaveToolTip()
+    }
+
+    fun getSave(): Boolean {
+        return shoppingListUseCases.getSaveToolTip.getSaveToolTip()
+    }
+
+    fun saveAdd() {
+        shoppingListUseCases.saveAddToolTip.saveAddToolTip()
+    }
+
+    fun getAdd(): Boolean {
+        return shoppingListUseCases.getAddToolTip.getAddToolTip()
+    }
+
+    fun saveHistory() {
+        shoppingListUseCases.saveHistoryToolTip.saveHistoryToolTip()
+    }
+
+    fun getHistory(): Boolean {
+        return shoppingListUseCases.getHistoryToolTip.getHistoryToolTip()
+    }
+
     private fun filterShoppingList(shoppingItemList: ArrayList<ShoppingItem>) {
         viewModelScope.launch {
             val arraylist = arrayListOf<ShoppingItem>()

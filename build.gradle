@@ -4,6 +4,7 @@ buildscript {
         versions = [
                 "nav_version"    : "2.5.3",
                 "hilt_compiler"  : "1.0.0",
+                "balloon_version": "1.5.2",
                 "hilt"           : '2.44',
                 "room_version"   : "2.5.1",
                 "gson_version"   : "2.10.1",

@@ -12,5 +12,13 @@ data class ShoppingUseCase(
     val getListID: GetListID,
     val saveListID: SaveListID,
     val filterListByItemType: FilterListByItemType,
-    val deleteRelatedShoppingItems: DeleteRelatedShoppingItems
+    val deleteRelatedShoppingItems: DeleteRelatedShoppingItems,
+    val getAddToolTip: GetAddToolTip,
+    val getDeleteToolTip: GetDeleteToolTip,
+    val getHistoryToolTip: GetHistoryToolTip,
+    val getSaveToolTip: GetSaveToolTip,
+    val saveAddToolTip: SaveAddToolTip,
+    val saveDeleteToolTip: SaveDeleteToolTip,
+    val saveHistoryToolTip: SaveHistoryToolTip,
+    val saveSaveToolTip: SaveSaveToolTip
 )

@@ -24,11 +24,9 @@ import com.ozgursarki.shoppinglist.presentation.adapter.ShoppingListAdapter
 import com.ozgursarki.shoppinglist.presentation.adapter.viewholder.DetailListViewHolder
 import com.ozgursarki.shoppinglist.presentation.adapter.viewholder.HeaderViewHolder
 import com.ozgursarki.shoppinglist.presentation.adapter.viewholder.ShoppingListViewHolder
+import com.ozgursarki.shoppinglist.presentation.enum.ToolTipLocation
 import com.ozgursarki.shoppinglist.presentation.enum.ViewHolderType
-import com.ozgursarki.shoppinglist.util.DateUtil
-import com.ozgursarki.shoppinglist.util.PopUpHelper
-import com.ozgursarki.shoppinglist.util.SwipeToDeleteCallback
-import com.ozgursarki.shoppinglist.util.UseCaseHelper
+import com.ozgursarki.shoppinglist.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.Calendar
@@ -148,6 +146,21 @@ class HomeScreenFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        if (!homeScreenViewModel.getAdd()) {
+            BalloonHelper.createToolTip(
+                requireContext(),
+                viewLifecycleOwner,
+                binding.addShoppingItemButton,
+                R.color.black,
+                "Here! You can create an shopping item for the list !",
+                toolTipLocation = ToolTipLocation.TOP,
+                onDismiss = {
+                    homeScreenViewModel.saveAdd()
+                }
+            )
+        }
+
+
         if (homeScreenViewModel.getListID() == -1L) {
             val date = Calendar.getInstance(DateUtil.LOCALE)
             val shoppingList = ShoppingList(date.timeInMillis)
@@ -185,6 +198,45 @@ class HomeScreenFragment : Fragment() {
                 shoppingListRV.visibility = View.VISIBLE
                 viewNoData.visibility = View.GONE
                 toolBar.findViewById<ActionMenuItemView>(R.id.delete).visibility = View.VISIBLE
+
+                if (!homeScreenViewModel.getDelete() && !homeScreenViewModel.getHistory() && !homeScreenViewModel.getSave()) {
+                    BalloonHelper.createToolTip(
+                        requireContext(),
+                        viewLifecycleOwner,
+                        binding.toolBar.findViewById(R.id.save),
+                        R.color.black,
+                        "Here! You can save the the shopping list!",
+                        toolTipLocation = ToolTipLocation.BOTTOM,
+                        onDismiss = {
+                            BalloonHelper.createToolTip(
+                                requireContext(),
+                                viewLifecycleOwner,
+                                binding.toolBar.findViewById(R.id.navigate),
+                                R.color.black,
+                                "Here! You can navigate the screen to history shopping list!",
+                                toolTipLocation = ToolTipLocation.BOTTOM,
+                                onDismiss = {
+                                    BalloonHelper.createToolTip(
+                                        requireContext(),
+                                        viewLifecycleOwner,
+                                        binding.toolBar.findViewById(R.id.delete),
+                                        R.color.black,
+                                        "Here! You can delete all shopping items!",
+                                        toolTipLocation = ToolTipLocation.BOTTOM,
+                                        onDismiss = {
+                                            homeScreenViewModel.apply {
+                                                saveDelete()
+                                                saveHistory()
+                                                saveSave()
+                                            }
+                                        }
+                                    )
+                                }
+                            )
+                        }
+                    )
+                }
+
             }
             adapter.setShoppingList(shoppingArrayList)
 
