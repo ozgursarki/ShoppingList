@@ -21,6 +21,8 @@ class HomeScreenViewModel @Inject constructor(
     private val shoppingListUseCases: ShoppingUseCase
 ) : ViewModel() {
 
+    private var itemSize: Int = 0
+
 
     private val _uiState: MutableStateFlow<HomeScreenUIState> =
         MutableStateFlow(HomeScreenUIState())
@@ -34,9 +36,13 @@ class HomeScreenViewModel @Inject constructor(
             shoppingListUseCases.getShoppingListWithItems.invoke(listID)
                 .onSuccess {
                     it.collect { shoppingListItems ->
+                        if (shoppingListItems.isNotEmpty() && shoppingListItems[0].shoppingItemEntityList.size != itemSize) {
+                            newItem.invoke()
+                            delay(1500)
+                            itemSize = shoppingListItems[0].shoppingItemEntityList.size
+                        }
 
-                        newItem.invoke()
-                        delay(2000)
+
                         val shoppingItems = shoppingListItems.map { shoppingList ->
                             shoppingList.toShoppingListItems()
                         }
@@ -86,9 +92,9 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
-    fun deleteShoppingItemsFromDatabase(itemID: Long) {
+    fun deleteShoppingItemsFromDatabase(listID: Long) {
         viewModelScope.launch {
-            shoppingListUseCases.deleteRelatedShoppingItems.invoke(itemID)
+            shoppingListUseCases.deleteRelatedShoppingItems.invoke(listID)
         }
     }
 
