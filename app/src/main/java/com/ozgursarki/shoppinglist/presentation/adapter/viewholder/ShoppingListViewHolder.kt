@@ -28,27 +28,27 @@ class ShoppingListViewHolder(
             date.text = shoppingItem.date
             when(shoppingItem.type) {
                 ItemType.FRUIT.type -> {
-                    binding.root.setBackgroundResource(R.color.BabyBlue)
+                    binding.rowItemConstrain.setBackgroundColor(binding.root.context.getColor(R.color.BabyBlue))
                     binding.minusButton.setBackgroundResource(R.color.BabyBlue)
                     binding.plusButton.setBackgroundResource(R.color.BabyBlue)
                 }
                 ItemType.VEGETABLES.type -> {
-                    binding.root.setBackgroundResource(R.color.LightGreen)
+                    binding.rowItemConstrain.setBackgroundColor(binding.root.context.getColor(R.color.LightGreen))
                     binding.minusButton.setBackgroundResource(R.color.LightGreen)
                     binding.plusButton.setBackgroundResource(R.color.LightGreen)
                 }
                 ItemType.SNACK.type -> {
-                    binding.root.setBackgroundResource(R.color.RedOrange)
+                    binding.rowItemConstrain.setBackgroundColor(binding.root.context.getColor(R.color.RedOrange))
                     binding.minusButton.setBackgroundResource(R.color.RedOrange)
                     binding.plusButton.setBackgroundResource(R.color.RedOrange)
                 }
                 ItemType.OTHER.type -> {
-                    binding.root.setBackgroundResource(R.color.Violet)
+                    binding.rowItemConstrain.setBackgroundColor(binding.root.context.getColor(R.color.Violet))
                     binding.minusButton.setBackgroundResource(R.color.Violet)
                     binding.plusButton.setBackgroundResource(R.color.Violet)
                 }
                 ItemType.BREAKFAST.type -> {
-                    binding.root.setBackgroundResource(R.color.RedPink)
+                    binding.rowItemConstrain.setBackgroundColor(binding.root.context.getColor(R.color.RedPink))
                     binding.minusButton.setBackgroundResource(R.color.RedPink)
                     binding.plusButton.setBackgroundResource(R.color.RedPink)
 

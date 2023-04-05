@@ -22,24 +22,25 @@ class DetailListViewHolder(
 
             when(shoppingItem.type) {
                 ItemType.FRUIT.type -> {
-                    binding.itemNameRoot.setBackgroundResource(R.color.BabyBlue)
-                    binding.itemCountRoot.setBackgroundResource(R.color.BabyBlue)
+                    binding.itemNameRoot.setBackgroundColor(binding.root.context.getColor(R.color.BabyBlue))
+                    binding.itemCountRoot.setBackgroundColor(binding.root.context.getColor(R.color.BabyBlue))
+
                 }
                 ItemType.VEGETABLES.type -> {
-                    binding.itemNameRoot.setBackgroundResource(R.color.LightGreen)
-                    binding.itemCountRoot.setBackgroundResource(R.color.LightGreen)
+                    binding.itemNameRoot.setBackgroundColor(binding.root.context.getColor(R.color.LightGreen))
+                    binding.itemCountRoot.setBackgroundColor(binding.root.context.getColor(R.color.LightGreen))
                 }
                 ItemType.SNACK.type -> {
-                    binding.itemNameRoot.setBackgroundResource(R.color.RedOrange)
-                    binding.itemCountRoot.setBackgroundResource(R.color.RedOrange)
+                    binding.itemNameRoot.setBackgroundColor(binding.root.context.getColor(R.color.RedOrange))
+                    binding.itemCountRoot.setBackgroundColor(binding.root.context.getColor(R.color.RedOrange))
                 }
                 ItemType.OTHER.type -> {
-                    binding.itemNameRoot.setBackgroundResource(R.color.Violet)
-                    binding.itemCountRoot.setBackgroundResource(R.color.Violet)
+                    binding.itemNameRoot.setBackgroundColor(binding.root.context.getColor(R.color.Violet))
+                    binding.itemCountRoot.setBackgroundColor(binding.root.context.getColor(R.color.Violet))
                 }
                 ItemType.BREAKFAST.type -> {
-                    binding.itemNameRoot.setBackgroundResource(R.color.RedPink)
-                    binding.itemCountRoot.setBackgroundResource(R.color.RedPink)
+                    binding.itemNameRoot.setBackgroundColor(binding.root.context.getColor(R.color.RedPink))
+                    binding.itemCountRoot.setBackgroundColor(binding.root.context.getColor(R.color.RedPink))
 
                 }
 
