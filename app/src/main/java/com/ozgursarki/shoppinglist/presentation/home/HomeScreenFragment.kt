@@ -51,11 +51,11 @@ class HomeScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ShoppingListAdapter(viewHolderType = ViewHolderType.SHOPPING_VIEWHOLDER, buttonCallback = {
-            homeScreenViewModel.updateShoppingItem(it)
-            }, shoppingHeaderCallBack = {
-                homeScreenViewModel.removeRelatedItems(it)
-        })
+        adapter = ShoppingListAdapter(
+            viewHolderType = ViewHolderType.SHOPPING_VIEWHOLDER,
+            buttonCallback = {
+                homeScreenViewModel.updateShoppingItem(it)
+            })
         binding.shoppingListRV.adapter = adapter
 
         binding.addShoppingItemButton.setOnClickListener {
@@ -65,7 +65,7 @@ class HomeScreenFragment : Fragment() {
             )
         }
 
-        val swipeGesture = object: SwipeToDeleteCallback() {
+        val swipeGesture = object : SwipeToDeleteCallback() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 if (viewHolder is HeaderViewHolder) {
                     return
@@ -128,11 +128,14 @@ class HomeScreenFragment : Fragment() {
                 findNavController().navigate(R.id.action_homeScreenFragment_to_historyFragment)
                 homeScreenViewModel.saveListID(-1L)
             } else {
-                PopUpHelper.showErrorPopUp(requireActivity().getString(R.string.error_empty_list), requireContext())
+                PopUpHelper.showErrorPopUp(
+                    requireActivity().getString(R.string.error_empty_list),
+                    requireContext()
+                )
             }
         }
 
-        binding.toolBar.findViewById<ActionMenuItemView>(R.id.navigate).setOnClickListener{
+        binding.toolBar.findViewById<ActionMenuItemView>(R.id.navigate).setOnClickListener {
             homeScreenViewModel.deleteShoppingList()
             findNavController().navigate(R.id.action_homeScreenFragment_to_historyFragment)
         }
@@ -171,13 +174,12 @@ class HomeScreenFragment : Fragment() {
             homeScreenViewModel.getShoppingListWithItems(homeScreenViewModel.getListID()) {
                 binding.animationView.visibility = View.VISIBLE
             }
-        }else {
+        } else {
             homeScreenViewModel.insertShoppingList(ShoppingList(homeScreenViewModel.getListID()))
             homeScreenViewModel.getShoppingListWithItems(homeScreenViewModel.getListID()) {
                 binding.animationView.visibility = View.VISIBLE
             }
         }
-
 
 
     }
@@ -187,7 +189,7 @@ class HomeScreenFragment : Fragment() {
         homeScreenUiState.shoppingList.forEach {
             if (it is ShoppingItem) {
                 shoppingArrayList.add(it.copy()) //reference bug fixed
-            }else {
+            } else {
                 shoppingArrayList.add(ShoppingHeader((it as ShoppingHeader).title))
             }
 
@@ -204,7 +206,7 @@ class HomeScreenFragment : Fragment() {
                 viewNoData.visibility = View.VISIBLE
                 toolBar.findViewById<ActionMenuItemView>(R.id.delete).visibility = View.GONE
             }
-        }else {
+        } else {
             binding.animationView.visibility = View.GONE
             binding.apply {
                 shoppingListRV.visibility = View.VISIBLE

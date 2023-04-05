@@ -13,7 +13,6 @@ class ShoppingListAdapter(
     private val shoppingItemList: ArrayList<Any> = arrayListOf(),
     private val viewHolderType: ViewHolderType,
     private val buttonCallback: (ShoppingItem) -> Unit,
-    private val shoppingHeaderCallBack: (ShoppingHeader) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -61,9 +60,7 @@ class ShoppingListAdapter(
                 }
             }
             is HeaderViewHolder -> {
-                holder.bind(shoppingItemList[position] as ShoppingHeader) {
-                    shoppingHeaderCallBack.invoke(it)
-                }
+                holder.bind(shoppingItemList[position] as ShoppingHeader)
             }
             is DetailListViewHolder -> {
                 holder.bind(shoppingItemList[position] as ShoppingItem)

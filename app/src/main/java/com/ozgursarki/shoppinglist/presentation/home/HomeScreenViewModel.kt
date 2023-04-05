@@ -143,18 +143,6 @@ class HomeScreenViewModel @Inject constructor(
 
         }
     }
-    fun removeRelatedItems(shoppingHeader: ShoppingHeader) {
 
-        val arrayList = arrayListOf<Any>()
-        _uiState.value.shoppingList.forEach{
-            if(it is ShoppingItem && it.type.equals(shoppingHeader.title, ignoreCase = true)) {
-            }else {
-                arrayList.add(it)
-            }
-        }
-        _uiState.update {
-            it.copy(arrayList,false)
-        }
-    }
 
 }

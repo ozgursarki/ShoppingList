@@ -10,11 +10,8 @@ class HeaderViewHolder(
     private val binding: RowItemHeaderBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(shoppingHeader: ShoppingHeader, shoppingHeaderCallBack: (ShoppingHeader) -> Unit) {
+    fun bind(shoppingHeader: ShoppingHeader) {
         binding.itemHeader.text = shoppingHeader.title
-        binding.root.setOnClickListener{
-            shoppingHeaderCallBack.invoke(shoppingHeader)
-        }
     }
 
     companion object {
