@@ -117,10 +117,10 @@ class AddShoppingItemFragment(
                     plusButton.setBackgroundResource(R.color.BabyBlue)
                     countText.setBackgroundResource(R.color.BabyBlue)
                     shoppingItemName.setBackgroundResource(R.color.BabyBlue)
-                    addButton.setBackgroundResource(R.color.BabyBlue)
                 }
 
-            }
+                }
+
             1 -> {
                 view?.setBackgroundResource(R.color.LightGreen)
                 binding.apply {
@@ -130,7 +130,6 @@ class AddShoppingItemFragment(
                     plusButton.setBackgroundResource(R.color.LightGreen)
                     countText.setBackgroundResource(R.color.LightGreen)
                     shoppingItemName.setBackgroundResource(R.color.LightGreen)
-                    addButton.setBackgroundResource(R.color.LightGreen)
                 }
 
             }
@@ -143,7 +142,6 @@ class AddShoppingItemFragment(
                     plusButton.setBackgroundResource(R.color.RedPink)
                     countText.setBackgroundResource(R.color.RedPink)
                     shoppingItemName.setBackgroundResource(R.color.RedPink)
-                    addButton.setBackgroundResource(R.color.RedPink)
                 }
             }
             3 -> {
@@ -155,7 +153,6 @@ class AddShoppingItemFragment(
                     plusButton.setBackgroundResource(R.color.RedOrange)
                     countText.setBackgroundResource(R.color.RedOrange)
                     shoppingItemName.setBackgroundResource(R.color.RedOrange)
-                    addButton.setBackgroundResource(R.color.RedOrange)
                 }
             }
             4 -> {
@@ -167,7 +164,6 @@ class AddShoppingItemFragment(
                     plusButton.setBackgroundResource(R.color.Violet)
                     countText.setBackgroundResource(R.color.Violet)
                     shoppingItemName.setBackgroundResource(R.color.Violet)
-                    addButton.setBackgroundResource(R.color.Violet)
                 }
             }
 
