@@ -34,9 +34,7 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ShoppingListAdapter(viewHolderType = ViewHolderType.DETAIL_VIEWHOLDER, buttonCallback = {}) {
-
-        }
+        adapter = ShoppingListAdapter(viewHolderType = ViewHolderType.DETAIL_VIEWHOLDER, buttonCallback = {})
         binding.detailRV.adapter = adapter
 
         val shoppingList = args.shoppingList

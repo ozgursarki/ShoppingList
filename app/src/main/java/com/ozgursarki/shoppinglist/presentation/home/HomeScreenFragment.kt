@@ -44,6 +44,21 @@ class HomeScreenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeScreenBinding.inflate(inflater)
+
+        if (homeScreenViewModel.getListID() == -1L) {
+            val date = Calendar.getInstance(DateUtil.LOCALE)
+            val shoppingList = ShoppingList(date.timeInMillis)
+            homeScreenViewModel.insertShoppingList(shoppingList)
+            homeScreenViewModel.saveListID(shoppingList.listID)
+            homeScreenViewModel.getShoppingListWithItems(homeScreenViewModel.getListID()) {
+                binding.animationView.visibility = View.VISIBLE
+            }
+        } else {
+            homeScreenViewModel.insertShoppingList(ShoppingList(homeScreenViewModel.getListID()))
+            homeScreenViewModel.getShoppingListWithItems(homeScreenViewModel.getListID()) {
+                binding.animationView.visibility = View.VISIBLE
+            }
+        }
         return binding.root
     }
 
@@ -149,8 +164,6 @@ class HomeScreenFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        binding.animationView.visibility = View.VISIBLE
-
         if (!homeScreenViewModel.getAdd()) {
             BalloonHelper.createToolTip(
                 requireContext(),
@@ -166,20 +179,7 @@ class HomeScreenFragment : Fragment() {
         }
 
 
-        if (homeScreenViewModel.getListID() == -1L) {
-            val date = Calendar.getInstance(DateUtil.LOCALE)
-            val shoppingList = ShoppingList(date.timeInMillis)
-            homeScreenViewModel.insertShoppingList(shoppingList)
-            homeScreenViewModel.saveListID(shoppingList.listID)
-            homeScreenViewModel.getShoppingListWithItems(homeScreenViewModel.getListID()) {
-                binding.animationView.visibility = View.VISIBLE
-            }
-        } else {
-            homeScreenViewModel.insertShoppingList(ShoppingList(homeScreenViewModel.getListID()))
-            homeScreenViewModel.getShoppingListWithItems(homeScreenViewModel.getListID()) {
-                binding.animationView.visibility = View.VISIBLE
-            }
-        }
+
 
 
     }
