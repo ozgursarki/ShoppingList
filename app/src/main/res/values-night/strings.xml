@@ -9,4 +9,8 @@
     <string name="enter_shopping_item_name">Enter Shopping Item Name</string>
     <string name="add_item">Add Item</string>
     <string name="_1">1</string>
+    <string name="add_button_tooltip">Here! You can create a shopping item for the list !</string>
+    <string name="save_button_tooltip">Here! You can save the shopping list!</string>
+    <string name="navigate_tooltip">Here! You can navigate to history shopping list!</string>
+    <string name="delete_button_tooltip">Here! You can delete all shopping items!</string>
 </resources>

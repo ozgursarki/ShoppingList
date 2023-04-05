@@ -170,7 +170,7 @@ class HomeScreenFragment : Fragment() {
                 viewLifecycleOwner,
                 binding.addShoppingItemButton,
                 R.color.black,
-                "Here! You can create an shopping item for the list !",
+                getString(R.string.add_button_tooltip),
                 toolTipLocation = ToolTipLocation.TOP,
                 onDismiss = {
                     homeScreenViewModel.saveAdd()
@@ -219,7 +219,7 @@ class HomeScreenFragment : Fragment() {
                         viewLifecycleOwner,
                         binding.toolBar.findViewById(R.id.save),
                         R.color.black,
-                        "Here! You can save the the shopping list!",
+                        getString(R.string.save_button_tooltip),
                         toolTipLocation = ToolTipLocation.BOTTOM,
                         onDismiss = {
                             BalloonHelper.createToolTip(
@@ -227,7 +227,7 @@ class HomeScreenFragment : Fragment() {
                                 viewLifecycleOwner,
                                 binding.toolBar.findViewById(R.id.navigate),
                                 R.color.black,
-                                "Here! You can navigate the screen to history shopping list!",
+                                getString(R.string.navigate_tooltip),
                                 toolTipLocation = ToolTipLocation.BOTTOM,
                                 onDismiss = {
                                     BalloonHelper.createToolTip(
@@ -235,7 +235,7 @@ class HomeScreenFragment : Fragment() {
                                         viewLifecycleOwner,
                                         binding.toolBar.findViewById(R.id.delete),
                                         R.color.black,
-                                        "Here! You can delete all shopping items!",
+                                        getString(R.string.delete_button_tooltip),
                                         toolTipLocation = ToolTipLocation.BOTTOM,
                                         onDismiss = {
                                             homeScreenViewModel.apply {
