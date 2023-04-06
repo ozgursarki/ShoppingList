@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import com.ozgursarki.shoppinglist.data.local.entities.ShoppingItemEntity
 import com.ozgursarki.shoppinglist.data.local.entities.ShoppingListEntity
 
-@Database(entities = [ShoppingListEntity::class, ShoppingItemEntity::class], version = 1)
+@Database(entities = [ShoppingListEntity::class, ShoppingItemEntity::class], version = 2)
 //@TypeConverters(Converters::class)
 abstract class ShoppingDatabase : RoomDatabase() {
     abstract fun shoppingListDao(): ShoppingListDAO

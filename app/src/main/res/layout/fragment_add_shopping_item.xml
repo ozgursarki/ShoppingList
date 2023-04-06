@@ -22,7 +22,7 @@
         android:layout_marginTop="5dp"
         android:text="@string/enter_new_shopping_item"
         android:textAllCaps="true"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

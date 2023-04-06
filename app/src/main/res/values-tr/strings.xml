@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Alışveriş Listesi</string>
+    <string name="minusbutton">minusButton</string>
+    <string name="plusbutton">plusButton</string>
+    <string name="add_button">add button</string>
+    <string name="no_data">Liste Boş! Artı butonuyla yeni bir ürün ekleyebilirsin</string>
+    <string name="no_item">Geçmiş Liste Boş! Artı butonuyla yeni bir liste oluşturabilirsin</string>
+    <string name="save">save</string>
+    <string name="delete">delete</string>
+    <string name="history">history</string>
+    <string name="error_empty_list">Boş liste kaydedilemez</string>
+    <string name="error_empty_name">İsmi olmadan ürün kaydedilemez</string>
+
+
+    <string name="enter_new_shopping_item">Yeni alışveriş ürünü oluştur</string>
+    <string name="enter_shopping_item_name">Ürün ismi gir</string>
+    <string name="add_item">İtem ekle</string>
+    <string name="_1">1</string>
+    <string name="add_button_tooltip">Buradan listeye ürün ekleyebilirsin</string>
+    <string name="save_button_tooltip">Listeni buradan kaydedebilirsin</string>
+    <string name="navigate_tooltip">Buradan kayıtlı listelerine gidebilirsin</string>
+    <string name="delete_button_tooltip">Buradan listendeki tüm ürünleri silebilirsin</string>
+    <string-array name="item_type_array">
+        <item>Meyve</item>
+        <item>Sebze</item>
+        <item>Kahvaltılık</item>
+        <item>Atıştırmalık</item>
+        <item>Diğer</item>
+    </string-array>
+</resources>
