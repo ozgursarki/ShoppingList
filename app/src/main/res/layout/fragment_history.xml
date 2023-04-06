@@ -10,7 +10,7 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/neon_purple"
+        android:backgroundTint="@color/RedPink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             app:titleTextColor="@color/white"
             android:layout_height="?attr/actionBarSize"
-            app:title="NEON APPS-History" />
+            app:title="@string/title" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -50,7 +50,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:gravity="center"
-        android:text="@string/no_data"
+        android:text="@string/no_item"
         android:textColor="#0E0A0B"
         android:textSize="16sp"
         android:textStyle="bold"

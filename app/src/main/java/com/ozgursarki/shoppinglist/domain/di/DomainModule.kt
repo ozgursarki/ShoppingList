@@ -25,7 +25,17 @@ object DomainModule {
             getAllShoppingItemsWithoutFlow = GetAllShoppingItemsWithoutFlow(repository),
             deleteShoppingList = DeleteShoppingList(repository),
             getListID = GetListID(repository),
-            saveListID = SaveListID(repository)
+            saveListID = SaveListID(repository),
+            filterListByItemType = FilterListByItemType(),
+            deleteRelatedShoppingItems = DeleteRelatedShoppingItems(repository),
+            getAddToolTip = GetAddToolTip(repository),
+            getDeleteToolTip = GetDeleteToolTip(repository),
+            getHistoryToolTip = GetHistoryToolTip(repository),
+            getSaveToolTip = GetSaveToolTip(repository),
+            saveAddToolTip = SaveAddToolTip(repository),
+            saveDeleteToolTip = SaveDeleteToolTip(repository),
+            saveHistoryToolTip = SaveHistoryToolTip(repository),
+            saveSaveToolTip = SaveSaveToolTip(repository)
         )
     }
 }

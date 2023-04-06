@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/black</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/neon_app_logo</item>
+        <item name="windowSplashScreenBackground">@color/RedPink</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_shopping</item>
         <item name="postSplashScreenTheme">@style/Theme.ShoppingList</item>
     </style>
 </resources>

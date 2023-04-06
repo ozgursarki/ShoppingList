@@ -4,6 +4,7 @@
     <string name="plusbutton">plusButton</string>
     <string name="add_button">add button</string>
     <string name="no_data">The List is Empty!\nYou can add an item by clicking the add button</string>
+    <string name="no_item">The HistoryList is Empty!\nYou can add an item by clicking the add button</string>
     <string name="save">save</string>
     <string name="delete">delete</string>
     <string name="history">history</string>
@@ -15,4 +16,18 @@
     <string name="enter_shopping_item_name">Enter Shopping Item Name</string>
     <string name="add_item">Add Item</string>
     <string name="_1">1</string>
+    <string name="add_button_tooltip">Here! You can create a shopping item for the list !</string>
+    <string name="save_button_tooltip">Here! You can save the shopping list!</string>
+    <string name="navigate_tooltip">Here! You can navigate to history shopping list!</string>
+    <string name="delete_button_tooltip">Here! You can delete all shopping items!</string>
+    <string name="other">vegetables</string>
+    <string name="title">SHOPPING LIST HISTORY</string>
+    <string name="titlehome">SHOPPING LIST</string>
+    <string-array name="item_type_array">
+        <item>Fruit</item>
+        <item>Vegetables</item>
+        <item>Breakfast</item>
+        <item>Snack</item>
+        <item>Other</item>
+    </string-array>
 </resources>

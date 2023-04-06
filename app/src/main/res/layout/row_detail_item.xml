@@ -8,13 +8,14 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
+        android:id="@+id/itemNameRoot"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_weight="1"
-        android:elevation="5dp"
-        app:cardCornerRadius="8dp"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="5dp"
         app:strokeColor="@color/black"
-        app:strokeWidth="2dp">
+        app:strokeWidth="1dp">
 
         <TextView
             android:id="@+id/shoppingItemName"
@@ -23,20 +24,20 @@
             android:layout_marginStart="8dp"
             android:paddingVertical="5dp"
             android:textColor="@color/black"
-            android:textStyle="bold"
             tools:text="Elma" />
 
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
+        android:id="@+id/itemCountRoot"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_weight="4"
-        android:elevation="5dp"
-        app:cardCornerRadius="8dp"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="5dp"
         app:strokeColor="@color/black"
-        app:strokeWidth="2dp">
+        app:strokeWidth="1dp">
 
         <TextView
             android:id="@+id/shoppingItemCount"
@@ -45,7 +46,6 @@
             android:layout_gravity="center"
             android:paddingVertical="5dp"
             android:textColor="@color/black"
-            android:textStyle="bold"
             tools:text="5" />
 
 

@@ -1,9 +1,13 @@
 package com.ozgursarki.shoppinglist.presentation.home.add
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
@@ -12,14 +16,18 @@ import com.ozgursarki.shoppinglist.R
 import com.ozgursarki.shoppinglist.databinding.FragmentAddShoppingItemBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.extension.convertToInt
+import com.ozgursarki.shoppinglist.presentation.enum.ItemType
+import com.ozgursarki.shoppinglist.presentation.enum.generateItemType
+import com.ozgursarki.shoppinglist.util.DateUtil
 import com.ozgursarki.shoppinglist.util.PopUpHelper
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 
 @AndroidEntryPoint
 class AddShoppingItemFragment(
     private val listID: Long
-) : BottomSheetDialogFragment() {
+) : BottomSheetDialogFragment(), AdapterView.OnItemSelectedListener {
 
     private lateinit var binding: FragmentAddShoppingItemBinding
     private val addShoppingItemViewModel: AddShoppingItemViewModel by viewModels()
@@ -36,6 +44,21 @@ class AddShoppingItemFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val spinner: Spinner = binding.bottomSheetSpinner
+
+        spinner.onItemSelectedListener = this
+
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.item_type_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+            spinner.adapter = adapter
+        }
 
 
         binding.addButton.setOnClickListener {
@@ -60,10 +83,19 @@ class AddShoppingItemFragment(
 
         addShoppingItemViewModel.isItemExist.observe(viewLifecycleOwner) {
             if (it.first) {
+                var type = "en"
+                type = if (Resources.getSystem().configuration.locales.get(0).language == "tr") {
+                    generateItemType(spinner.selectedItem.toString()).type
+                }else {
+                    spinner.selectedItem.toString()
+                }
+
                 val item = ShoppingItem(
                     name = binding.shoppingItemName.text.toString(),
                     count = countText.text.convertToInt(),
-                    listID = listID
+                    listID = listID,
+                    date = DateUtil.getDateWithoutHour(Calendar.getInstance().timeInMillis),
+                    type = type
                 )
                 addShoppingItemViewModel.insertShoppingItem(item)
             } else {
@@ -71,6 +103,7 @@ class AddShoppingItemFragment(
                     addShoppingItemViewModel.updateShoppingItem(shoppingItem.copy(count = binding.countText.text.convertToInt() + shoppingItem.count))
                 }
             }
+            this.dismiss()
         }
     }
 
@@ -83,6 +116,73 @@ class AddShoppingItemFragment(
         }
     }
 
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        when(position) {
+            0 -> {
+                view?.setBackgroundResource(R.color.BabyBlue)
+                binding.apply {
+                    titleText.setBackgroundResource(R.color.BabyBlue)
+                    bottomSheetConstrain.background.setTint(requireContext().getColor(R.color.BabyBlue))
+                    minusButton.setBackgroundResource(R.color.BabyBlue)
+                    plusButton.setBackgroundResource(R.color.BabyBlue)
+                    countText.setBackgroundResource(R.color.BabyBlue)
+                    shoppingItemName.setBackgroundResource(R.color.BabyBlue)
+                }
+
+                }
+
+            1 -> {
+                view?.setBackgroundResource(R.color.LightGreen)
+                binding.apply {
+                    titleText.setBackgroundResource(R.color.LightGreen)
+                    bottomSheetConstrain.background.setTint(requireContext().getColor(R.color.LightGreen))
+                    minusButton.setBackgroundResource(R.color.LightGreen)
+                    plusButton.setBackgroundResource(R.color.LightGreen)
+                    countText.setBackgroundResource(R.color.LightGreen)
+                    shoppingItemName.setBackgroundResource(R.color.LightGreen)
+                }
+
+            }
+            2 -> {
+                view?.setBackgroundResource(R.color.RedPink)
+                binding.apply {
+                    titleText.setBackgroundResource(R.color.RedPink)
+                    bottomSheetConstrain.background.setTint(requireContext().getColor(R.color.RedPink))
+                    minusButton.setBackgroundResource(R.color.RedPink)
+                    plusButton.setBackgroundResource(R.color.RedPink)
+                    countText.setBackgroundResource(R.color.RedPink)
+                    shoppingItemName.setBackgroundResource(R.color.RedPink)
+                }
+            }
+            3 -> {
+                view?.setBackgroundResource(R.color.RedOrange)
+                binding.apply {
+                    titleText.setBackgroundResource(R.color.RedOrange)
+                    bottomSheetConstrain.background.setTint(requireContext().getColor(R.color.RedOrange))
+                    minusButton.setBackgroundResource(R.color.RedOrange)
+                    plusButton.setBackgroundResource(R.color.RedOrange)
+                    countText.setBackgroundResource(R.color.RedOrange)
+                    shoppingItemName.setBackgroundResource(R.color.RedOrange)
+                }
+            }
+            4 -> {
+                view?.setBackgroundResource(R.color.Violet)
+                binding.apply {
+                    titleText.setBackgroundResource(R.color.Violet)
+                    bottomSheetConstrain.background.setTint(requireContext().getColor(R.color.Violet))
+                    minusButton.setBackgroundResource(R.color.Violet)
+                    plusButton.setBackgroundResource(R.color.Violet)
+                    countText.setBackgroundResource(R.color.Violet)
+                    shoppingItemName.setBackgroundResource(R.color.Violet)
+                }
+            }
+
+        }
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+    }
 
 
 }

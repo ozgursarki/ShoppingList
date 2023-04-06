@@ -58,11 +58,47 @@ class ShoppingRepository @Inject constructor(
         shoppingListDAO.deleteShoppingList(listID)
     }
 
+    suspend fun deleteShoppingListItems(listID: Long) {
+        shoppingItemDAO.deleteRelatedShoppingItems(listID)
+    }
+
     fun saveListID(listID: Long) {
         defaultPreferences.saveListID(listID)
     }
 
     fun getListID(): Long {
         return defaultPreferences.getListID()
+    }
+
+    fun saveDelete() {
+        defaultPreferences.saveDelete()
+    }
+
+    fun getDelete(): Boolean {
+        return defaultPreferences.getDelete()
+    }
+
+    fun saveSave() {
+        defaultPreferences.saveSave()
+    }
+
+    fun getSave(): Boolean {
+        return defaultPreferences.getSave()
+    }
+
+    fun saveAdd() {
+        defaultPreferences.saveAdd()
+    }
+
+    fun getAdd(): Boolean {
+        return defaultPreferences.getAdd()
+    }
+
+    fun saveHistory() {
+        defaultPreferences.saveHistory()
+    }
+
+    fun getHistory(): Boolean {
+        return defaultPreferences.getHistory()
     }
 }

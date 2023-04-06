@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.ozgursarki.shoppinglist.databinding.FragmentDetailBinding
-import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.presentation.adapter.ShoppingListAdapter
 import com.ozgursarki.shoppinglist.presentation.enum.ViewHolderType
 import com.ozgursarki.shoppinglist.util.DateUtil
+import com.ozgursarki.shoppinglist.util.ListHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,20 +34,14 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ShoppingListAdapter(viewHolderType = ViewHolderType.DETAIL_VIEWHOLDER) {
-
-        }
+        adapter = ShoppingListAdapter(viewHolderType = ViewHolderType.DETAIL_VIEWHOLDER, buttonCallback = {})
         binding.detailRV.adapter = adapter
 
         val shoppingList = args.shoppingList
-        binding.toolBar.title = DateUtil.getDateInTurkish(shoppingList.listID)
+        binding.toolBar.title = DateUtil.getDate(shoppingList.listID)
 
         detailViewModel.shoppingList.observe(viewLifecycleOwner) { shoppingListFromDatabase ->
-            val shoppingArrayList = arrayListOf<ShoppingItem>()
-            shoppingListFromDatabase.forEach {
-                shoppingArrayList.add(it.copy())
-            }
-            adapter.setShoppingList(shoppingArrayList)
+            adapter.setShoppingList(ListHelper.convertToList(shoppingListFromDatabase))
         }
 
         detailViewModel.getShoppingListWithItems(shoppingList.listID)

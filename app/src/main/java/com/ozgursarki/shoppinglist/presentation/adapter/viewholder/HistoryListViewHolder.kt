@@ -16,7 +16,7 @@ class HistoryListViewHolder(
     fun bind(shoppingList: ShoppingList, itemClicked: (ShoppingList) -> Unit) {
         localeShoppingList = shoppingList
 
-        binding.shoppingListName.text = DateUtil.getDateInTurkish(shoppingList.listID)
+        binding.shoppingListName.text = DateUtil.getDate(shoppingList.listID)
 
         binding.root.setOnClickListener{
             itemClicked.invoke(shoppingList)

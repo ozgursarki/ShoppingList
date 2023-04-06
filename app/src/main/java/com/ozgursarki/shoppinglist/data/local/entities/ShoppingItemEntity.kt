@@ -10,5 +10,7 @@ data class ShoppingItemEntity(
     val itemID: Long = 0,
     val name: String,
     val count: Int,
+    val date: String,
+    val type: String,
     @ColumnInfo(name = "listID") val listID: Long
 )

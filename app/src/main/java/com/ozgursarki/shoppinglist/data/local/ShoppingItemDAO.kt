@@ -14,4 +14,7 @@ interface ShoppingItemDAO {
     @Query("DELETE FROM shoppingItem WHERE itemID = :itemID")
     suspend fun deleteRelatedShoppingItem(itemID: Long)
 
+    @Query("DELETE FROM shoppingItem WHERE listID = :listID")
+    suspend fun deleteRelatedShoppingItems(listID: Long)
+
 }
