@@ -1,5 +1,6 @@
 package com.ozgursarki.shoppinglist.presentation.home.add
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,10 +16,12 @@ import com.ozgursarki.shoppinglist.R
 import com.ozgursarki.shoppinglist.databinding.FragmentAddShoppingItemBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingItem
 import com.ozgursarki.shoppinglist.extension.convertToInt
+import com.ozgursarki.shoppinglist.presentation.enum.ItemType
+import com.ozgursarki.shoppinglist.presentation.enum.generateItemType
 import com.ozgursarki.shoppinglist.util.DateUtil
 import com.ozgursarki.shoppinglist.util.PopUpHelper
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Calendar
+import java.util.*
 
 
 @AndroidEntryPoint
@@ -80,12 +83,19 @@ class AddShoppingItemFragment(
 
         addShoppingItemViewModel.isItemExist.observe(viewLifecycleOwner) {
             if (it.first) {
+                var type = "en"
+                type = if (Resources.getSystem().configuration.locales.get(0).language == "tr") {
+                    generateItemType(spinner.selectedItem.toString()).type
+                }else {
+                    spinner.selectedItem.toString()
+                }
+
                 val item = ShoppingItem(
                     name = binding.shoppingItemName.text.toString(),
                     count = countText.text.convertToInt(),
                     listID = listID,
                     date = DateUtil.getDateWithoutHour(Calendar.getInstance().timeInMillis),
-                    type = spinner.selectedItem.toString()
+                    type = type
                 )
                 addShoppingItemViewModel.insertShoppingItem(item)
             } else {

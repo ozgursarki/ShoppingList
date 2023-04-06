@@ -21,6 +21,9 @@
     <string name="save_button_tooltip">Listeni buradan kaydedebilirsin</string>
     <string name="navigate_tooltip">Buradan kayıtlı listelerine gidebilirsin</string>
     <string name="delete_button_tooltip">Buradan listendeki tüm ürünleri silebilirsin</string>
+    <string name="other">vegetables</string>
+    <string name="title">ALIŞVERİŞ LİSTESİ GEÇMİŞİ</string>
+    <string name="titlehome">ALIŞVERİŞ LİSTESİ</string>
     <string-array name="item_type_array">
         <item>Meyve</item>
         <item>Sebze</item>

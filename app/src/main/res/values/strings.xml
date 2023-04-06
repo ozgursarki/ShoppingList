@@ -20,6 +20,9 @@
     <string name="save_button_tooltip">Here! You can save the shopping list!</string>
     <string name="navigate_tooltip">Here! You can navigate to history shopping list!</string>
     <string name="delete_button_tooltip">Here! You can delete all shopping items!</string>
+    <string name="other">vegetables</string>
+    <string name="title">SHOPPING LIST HISTORY</string>
+    <string name="titlehome">SHOPPING LIST</string>
     <string-array name="item_type_array">
         <item>Fruit</item>
         <item>Vegetables</item>

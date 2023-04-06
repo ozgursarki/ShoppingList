@@ -22,7 +22,7 @@
             android:layout_height="?attr/actionBarSize"
             app:titleTextColor="@color/white"
             app:menu="@menu/toolbar_menu"
-            app:title="SHOPPING LIST" />
+            app:title="@string/titlehome" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView

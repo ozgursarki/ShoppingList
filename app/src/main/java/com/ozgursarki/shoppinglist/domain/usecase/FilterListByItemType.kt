@@ -1,5 +1,8 @@
 package com.ozgursarki.shoppinglist.domain.usecase
 
+import android.content.Context
+import android.content.res.Resources
+import com.ozgursarki.shoppinglist.R
 import com.ozgursarki.shoppinglist.data.local.ShoppingRepository
 import com.ozgursarki.shoppinglist.data.local.entities.relations.ShoppingListWithItemsEntity
 import com.ozgursarki.shoppinglist.data.mapper.toShoppingListItems
@@ -17,35 +20,58 @@ class FilterListByItemType @Inject constructor() {
     operator fun invoke(shoppingList: ArrayList<ShoppingItem>): ArrayList<Any> {
         val filteredList = arrayListOf<Any>()
 
-        filteredList.add(ShoppingHeader("BREAKFAST"))
+        if (Resources.getSystem().configuration.locales.get(0).language == "tr") {
+            filteredList.add(ShoppingHeader("Kahvaltılık"))
+        } else {
+            filteredList.add(ShoppingHeader("BREAKFAST"))
+        }
         val breakfastList = UseCaseHelper.filterListByType(
             shoppingList,
             filteredList,
             type = ItemType.BREAKFAST
         )
 
-        filteredList.add(ShoppingHeader("Fruit"))
+        if (Resources.getSystem().configuration.locales.get(0).language == "tr") {
+            filteredList.add(ShoppingHeader("Meyve"))
+        } else {
+            filteredList.add(ShoppingHeader("Fruit"))
+        }
         val breakfast_FruitList = UseCaseHelper.filterListByType(
             shoppingList,
             breakfastList,
             type = ItemType.FRUIT
         )
 
-        filteredList.add(ShoppingHeader("snack"))
+
+        if (Resources.getSystem().configuration.locales.get(0).language == "tr") {
+            filteredList.add(ShoppingHeader("Atıştırmalık"))
+        } else {
+            filteredList.add(ShoppingHeader("snack"))
+        }
         val break_fruit_snackList = UseCaseHelper.filterListByType(
             shoppingList,
             breakfast_FruitList,
             type = ItemType.SNACK
         )
 
-        filteredList.add(ShoppingHeader("vegetables"))
+
+        if (Resources.getSystem().configuration.locales.get(0).language == "tr") {
+            filteredList.add(ShoppingHeader("Sebze"))
+        } else {
+            filteredList.add(ShoppingHeader("vegetables"))
+        }
         val b_f_s_vList = UseCaseHelper.filterListByType(
             shoppingList,
             break_fruit_snackList,
             type = ItemType.VEGETABLES
         )
 
-        filteredList.add(ShoppingHeader("other"))
+        if (Resources.getSystem().configuration.locales.get(0).language == "tr") {
+            filteredList.add(ShoppingHeader("Diğer"))
+        } else {
+            filteredList.add(ShoppingHeader("other"))
+        }
+
         val allList = UseCaseHelper.filterListByType(
             shoppingList,
             b_f_s_vList,
