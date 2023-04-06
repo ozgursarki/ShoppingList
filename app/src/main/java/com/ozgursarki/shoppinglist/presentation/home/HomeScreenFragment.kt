@@ -96,17 +96,11 @@ class HomeScreenFragment : Fragment() {
                 }
                 when (viewHolder) {
                     is ShoppingListViewHolder -> {
+
                         viewHolder.getShoppingItem()
                             ?.let {
                                 homeScreenViewModel.deleteShoppingItemFromDatabase(it.itemID)
                             }
-
-                        shoppingList.removeAt(position)
-                        val newArraylist = arrayListOf<Any>()
-                        shoppingList.forEach {
-                            newArraylist.add(it)
-                        }
-                        adapter.setShoppingList(newArraylist)
                     }
                     is DetailListViewHolder -> {
                         viewHolder.getShoppingItem()
@@ -139,7 +133,7 @@ class HomeScreenFragment : Fragment() {
         }
 
         binding.toolBar.findViewById<ActionMenuItemView>(R.id.save).setOnClickListener {
-            if (!adapter.isListEmpty()) {
+            if (adapter.isListEmpty()) {
                 findNavController().navigate(R.id.action_homeScreenFragment_to_historyFragment)
                 homeScreenViewModel.saveListID(-1L)
             } else {
@@ -158,6 +152,7 @@ class HomeScreenFragment : Fragment() {
 
         binding.toolBar.findViewById<ActionMenuItemView>(R.id.delete).setOnClickListener {
             homeScreenViewModel.deleteShoppingItemsFromDatabase(homeScreenViewModel.getListID())
+            adapter.setShoppingList(arrayListOf())
         }
 
     }
@@ -195,6 +190,7 @@ class HomeScreenFragment : Fragment() {
             }
 
         }
+        adapter.setShoppingList(shoppingArrayList)
         var check = false
         homeScreenUiState.shoppingList.forEach {
             if (it is ShoppingItem) {

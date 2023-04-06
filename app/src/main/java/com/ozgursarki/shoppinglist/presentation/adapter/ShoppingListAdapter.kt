@@ -78,7 +78,9 @@ class ShoppingListAdapter(
     }
 
     fun isListEmpty(): Boolean {
-        return shoppingItemList.isEmpty()
+        return shoppingItemList.any {
+            it is ShoppingItem
+        }
     }
 
     fun getShoppingList(): ArrayList<Any> = shoppingItemList
