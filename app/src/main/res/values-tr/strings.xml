@@ -15,13 +15,12 @@
 
     <string name="enter_new_shopping_item">Yeni alışveriş ürünü oluştur</string>
     <string name="enter_shopping_item_name">Ürün ismi gir</string>
-    <string name="add_item">İtem ekle</string>
+    <string name="add_item">Ürün ekle</string>
     <string name="_1">1</string>
     <string name="add_button_tooltip">Buradan listeye ürün ekleyebilirsin</string>
     <string name="save_button_tooltip">Listeni buradan kaydedebilirsin</string>
     <string name="navigate_tooltip">Buradan kayıtlı listelerine gidebilirsin</string>
     <string name="delete_button_tooltip">Buradan listendeki tüm ürünleri silebilirsin</string>
-    <string name="other">vegetables</string>
     <string name="title">ALIŞVERİŞ LİSTESİ GEÇMİŞİ</string>
     <string name="titlehome">ALIŞVERİŞ LİSTESİ</string>
     <string-array name="item_type_array">
