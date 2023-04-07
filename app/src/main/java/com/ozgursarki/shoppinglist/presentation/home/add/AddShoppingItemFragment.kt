@@ -89,12 +89,18 @@ class AddShoppingItemFragment(
                 }else {
                     spinner.selectedItem.toString()
                 }
+                var date = "tr"
+                date = if (Resources.getSystem().configuration.locales.get(0).language == "en") {
+                    DateUtil.getDateWithoutHour(Calendar.getInstance().timeInMillis)
+                }else {
+                    DateUtil.getDateInTurkishWithoutHour(Calendar.getInstance().timeInMillis)
+                }
 
                 val item = ShoppingItem(
                     name = binding.shoppingItemName.text.toString(),
                     count = countText.text.convertToInt(),
                     listID = listID,
-                    date = DateUtil.getDateWithoutHour(Calendar.getInstance().timeInMillis),
+                    date = date,
                     type = type
                 )
                 addShoppingItemViewModel.insertShoppingItem(item)

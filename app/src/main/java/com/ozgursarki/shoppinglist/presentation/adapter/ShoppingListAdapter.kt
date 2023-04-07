@@ -13,6 +13,7 @@ class ShoppingListAdapter(
     private val shoppingItemList: ArrayList<Any> = arrayListOf(),
     private val viewHolderType: ViewHolderType,
     private val buttonCallback: (ShoppingItem) -> Unit,
+    private val itemChecked: (ShoppingItem) -> Unit = {}
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -63,7 +64,9 @@ class ShoppingListAdapter(
                 holder.bind(shoppingItemList[position] as ShoppingHeader)
             }
             is DetailListViewHolder -> {
-                holder.bind(shoppingItemList[position] as ShoppingItem)
+                holder.bind(shoppingItemList[position] as ShoppingItem) {
+                    itemChecked.invoke(it)
+                }
             }
         }
 
@@ -84,4 +87,19 @@ class ShoppingListAdapter(
     }
 
     fun getShoppingList(): ArrayList<Any> = shoppingItemList
+
+    fun calculateRatio(): Int {
+        return try {
+            val totalList = shoppingItemList.filter {
+                it is ShoppingItem
+            }.size
+
+            val checkedItemCount = shoppingItemList.filter {
+                it is ShoppingItem && it.isDone
+            }.size
+            (checkedItemCount * 100) / totalList
+        }catch (e: Exception) {
+            0
+        }
+    }
 }

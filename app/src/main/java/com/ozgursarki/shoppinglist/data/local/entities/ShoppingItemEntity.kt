@@ -12,5 +12,6 @@ data class ShoppingItemEntity(
     val count: Int,
     val date: String,
     val type: String,
+    val isDone: Boolean,
     @ColumnInfo(name = "listID") val listID: Long
 )

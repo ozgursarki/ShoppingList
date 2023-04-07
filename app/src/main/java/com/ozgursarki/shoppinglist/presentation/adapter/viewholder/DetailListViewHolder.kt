@@ -14,11 +14,12 @@ class DetailListViewHolder(
 
 
     private lateinit var dataShoppingItem: ShoppingItem
-    fun bind(shoppingItem: ShoppingItem) {
+    fun bind(shoppingItem: ShoppingItem, itemChecked: (ShoppingItem) -> Unit) {
         dataShoppingItem = shoppingItem
         binding.apply {
             shoppingItemName.text = shoppingItem.name
             shoppingItemCount.text = shoppingItem.count.toString()
+            itemCheckBox.isChecked = shoppingItem.isDone
 
             when(shoppingItem.type) {
                 ItemType.FRUIT.type -> {
@@ -44,6 +45,10 @@ class DetailListViewHolder(
 
                 }
 
+            }
+
+            itemCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
+                itemChecked.invoke(shoppingItem.copy(isDone = !shoppingItem.isDone))
             }
         }
     }

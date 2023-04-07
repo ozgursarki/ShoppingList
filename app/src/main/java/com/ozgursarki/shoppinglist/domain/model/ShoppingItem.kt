@@ -8,5 +8,6 @@ data class ShoppingItem(
     var count: Int,
     val listID: Long,
     val date: String,
-    val type: String
+    val type: String,
+    val isDone:Boolean = false
 )

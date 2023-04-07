@@ -1,5 +1,6 @@
 package com.ozgursarki.shoppinglist.presentation.adapter.viewholder
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -16,7 +17,12 @@ class HistoryListViewHolder(
     fun bind(shoppingList: ShoppingList, itemClicked: (ShoppingList) -> Unit) {
         localeShoppingList = shoppingList
 
-        binding.shoppingListName.text = DateUtil.getDate(shoppingList.listID)
+        if (Resources.getSystem().configuration.locales.get(0).language == "en") {
+            binding.shoppingListName.text = DateUtil.getDate(shoppingList.listID)
+        }else {
+            binding.shoppingListName.text = DateUtil.getDateInTurkish(shoppingList.listID)
+        }
+        binding.listDoneRate.text = "% ${shoppingList.ratio}"
 
         binding.root.setOnClickListener{
             itemClicked.invoke(shoppingList)

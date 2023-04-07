@@ -24,4 +24,6 @@ interface ShoppingListDAO {
     @Query("DELETE FROM shoppingList WHERE listID = :listID")
     suspend fun deleteShoppingList(listID: Long)
 
+    @Query("UPDATE shoppingList SET ratio = :ratio WHERE listID = :listID")
+    suspend fun updateShoppingList(ratio: Int, listID: Long)
 }

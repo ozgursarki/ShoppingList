@@ -6,5 +6,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "shoppingList")
 data class ShoppingListEntity(
     @PrimaryKey(autoGenerate = false)
-    val listID: Long
+    val listID: Long,
+    val ratio: Int
 )

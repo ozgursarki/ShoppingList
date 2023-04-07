@@ -35,7 +35,8 @@ object DomainModule {
             saveAddToolTip = SaveAddToolTip(repository),
             saveDeleteToolTip = SaveDeleteToolTip(repository),
             saveHistoryToolTip = SaveHistoryToolTip(repository),
-            saveSaveToolTip = SaveSaveToolTip(repository)
+            saveSaveToolTip = SaveSaveToolTip(repository),
+            updateShoppingList = UpdateShoppingList(repository)
         )
     }
 }

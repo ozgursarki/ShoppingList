@@ -8,11 +8,11 @@ import com.ozgursarki.shoppinglist.domain.model.ShoppingList
 import com.ozgursarki.shoppinglist.domain.model.ShoppingListWithItems
 
 fun ShoppingList.toShoppingListEntity(): ShoppingListEntity {
-    return ShoppingListEntity(listID)
+    return ShoppingListEntity(listID, ratio)
 }
 
 fun ShoppingListEntity.toShoppingList(): ShoppingList {
-    return ShoppingList(listID)
+    return ShoppingList(listID, ratio)
 }
 
 fun ShoppingItem.toShoppingItemEntity(): ShoppingItemEntity {
@@ -22,6 +22,7 @@ fun ShoppingItem.toShoppingItemEntity(): ShoppingItemEntity {
         count,
         date,
         type,
+        isDone,
         listID
     )
 }
@@ -33,12 +34,13 @@ fun ShoppingItemEntity.toShoppingItem(): ShoppingItem {
         count,
         listID,
         date,
-        type
+        type,
+        isDone
     )
 }
 
 fun ShoppingListWithItemsEntity.toShoppingListItems(): ShoppingListWithItems {
-    val shoppingItemList = shoppingItemEntityList.map{
+    val shoppingItemList = shoppingItemEntityList.map {
         it.toShoppingItem()
     }
     return ShoppingListWithItems(
