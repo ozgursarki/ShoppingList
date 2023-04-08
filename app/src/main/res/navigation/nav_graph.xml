@@ -13,8 +13,7 @@
         <action
             android:id="@+id/action_homeScreenFragment_to_historyFragment"
             app:destination="@id/historyFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/homeScreenFragment"
+
             app:enterAnim="@anim/enter_anim"
             app:exitAnim="@anim/exit_anim"
             app:popEnterAnim="@anim/pop_enter_anim"

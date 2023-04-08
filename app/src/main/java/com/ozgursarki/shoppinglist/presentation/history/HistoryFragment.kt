@@ -85,6 +85,8 @@ class HistoryFragment : Fragment() {
         }
 
         binding.createShoppingList.setOnClickListener {
+            historyViewModel.deleteShoppingList(historyViewModel.getListID())
+            historyViewModel.deleteShoppingItemsFromDatabase()
             findNavController().navigate(R.id.action_historyFragment_to_homeScreenFragment)
         }
     }
