@@ -29,4 +29,7 @@ interface ShoppingListDAO {
 
     @Query("SELECT * FROM shoppingList WHERE ratio < 100")
     suspend fun getUnfinishedList(): List<ShoppingListEntity>
+
+    @Query("SELECT * FROM shoppingList WHERE ratio = 100")
+    suspend fun getFinishedList(): List<ShoppingListEntity>
 }

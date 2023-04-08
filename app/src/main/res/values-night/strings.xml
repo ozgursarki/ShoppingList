@@ -16,4 +16,6 @@
     <string name="other">vegetables</string>
     <string name="title">SHOPPING LIST HISTORY</string>
     <string name="titlehome">SHOPPING LIST</string>
+    <string name="unfinished_list_title">Bitirilmemiş Liste Sayısı</string>
+    <string name="finished_list_count">Bitirilmiş Liste Sayısı</string>
 </resources>

@@ -46,7 +46,7 @@ class HomeScreenFragment : Fragment() {
         binding = FragmentHomeScreenBinding.inflate(inflater)
 
         if (homeScreenViewModel.getListID() == -1L) {
-            val date = Calendar.getInstance(DateUtil.LOCALE)
+            val date = Calendar.getInstance(DateUtil.LOCALE_EN)
             val shoppingList = ShoppingList(date.timeInMillis)
             homeScreenViewModel.insertShoppingList(shoppingList)
             homeScreenViewModel.saveListID(shoppingList.listID)

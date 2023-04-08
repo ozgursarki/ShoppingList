@@ -72,7 +72,7 @@ class DetailFragment : Fragment() {
 
     }
 
-    fun handleDetailUIState(shoppingList: List<Any>) {
+    private fun handleDetailUIState(shoppingList: List<Any>) {
         adapter.setShoppingList(ListHelper.convertToList(shoppingList))
         val ratio = adapter.calculateRatio()
         binding.progressBarRate.text = "%$ratio"

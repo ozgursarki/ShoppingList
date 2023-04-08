@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
@@ -20,7 +21,6 @@ class NotificationService: Service() {
     private lateinit var builder: NotificationCompat.Builder
     private lateinit var notificationManager: NotificationManager
     private lateinit var scope: CoroutineScope
-    private var title: String = "My Notification Title"
     private lateinit var handler: Handler
 
     companion object {
@@ -34,14 +34,11 @@ class NotificationService: Service() {
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         createNotificationChannel()
-        val remoteViews = RemoteViews(applicationContext.packageName, R.layout.notification_layout)
-        remoteViews.setTextViewText(R.id.notificationText, "Alışveriş")
-        remoteViews.setTextViewText(R.id.doneRate, "%50")
         builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("Notification Title")
             .setContentText("Notification Text")
             .setSmallIcon(R.drawable.ic_shopping)
-            .setCustomContentView(remoteViews)
+
 
         startForeground(NOTIFICATION_ID, builder.build())
 
@@ -72,15 +69,30 @@ class NotificationService: Service() {
     private fun updateNotification() {
         scope.launch {
             val unFinishedList = ShoppingDatabase.invoke(applicationContext).shoppingListDao().getUnfinishedList()
-            var content : String = ""
+            val finishedList = ShoppingDatabase.invoke(applicationContext).shoppingListDao().getFinishedList()
 
-            unFinishedList.forEach {
-                content += "${it.ratio} \n"
-            }
-            builder.setContentText(content)
             val remoteViews = RemoteViews(applicationContext.packageName, R.layout.notification_layout)
-            remoteViews.setTextViewText(R.id.notificationText, DateUtil.getDateInTurkishWithoutHour(unFinishedList[0].listID))
-            remoteViews.setTextViewText(R.id.doneRate, unFinishedList[0].ratio.toString())
+            val unfinishedListSize = unFinishedList.filter {
+                if (Resources.getSystem().configuration.locales.get(0).language == "tr") {
+                    DateUtil.isToday(it.listID, "tr")
+                }else {
+                    DateUtil.isToday(it.listID, "en")
+                }
+
+            }.size
+
+            val finishedListSize = finishedList.filter {
+                if (Resources.getSystem().configuration.locales.get(0).language == "tr") {
+                    DateUtil.isToday(it.listID, "tr")
+                }else {
+                    DateUtil.isToday(it.listID, "en")
+                }
+
+            }.size
+            remoteViews.setTextViewText(R.id.unfinishedListTitle, getString(R.string.unfinished_list_title))
+            remoteViews.setTextViewText(R.id.unfinishedListCount, unfinishedListSize.toString())
+            remoteViews.setTextViewText(R.id.finishedListTitle, getString(R.string.finished_list_count))
+            remoteViews.setTextViewText(R.id.finishedListCount, finishedListSize.toString())
             builder.setCustomContentView(remoteViews)
             notificationManager.notify(NOTIFICATION_ID, builder.build())
             handler.postDelayed({
