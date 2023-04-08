@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="64dp">
+
+    <ImageView
+        android:id="@+id/notificationImage"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="99dp"
+        android:src="@drawable/ic_shopping" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/notificationImage"
+        android:layout_alignBottom="@id/notificationImage"
+        android:layout_alignTop="@id/notificationImage"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_marginStart="10dp">
+
+        <TextView
+            android:id="@+id/notificationText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Cuma 25 Nisan" />
+
+        <TextView
+            android:id="@+id/doneRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="%25"
+            android:layout_marginTop="3dp"/>
+    </LinearLayout>
+</RelativeLayout>

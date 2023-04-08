@@ -8,9 +8,11 @@ import android.content.Intent
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
+import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.ozgursarki.shoppinglist.R
 import com.ozgursarki.shoppinglist.data.local.ShoppingDatabase
+import com.ozgursarki.shoppinglist.util.DateUtil
 import kotlinx.coroutines.*
 
 class NotificationService: Service() {
@@ -32,10 +34,14 @@ class NotificationService: Service() {
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         createNotificationChannel()
+        val remoteViews = RemoteViews(applicationContext.packageName, R.layout.notification_layout)
+        remoteViews.setTextViewText(R.id.notificationText, "Alışveriş")
+        remoteViews.setTextViewText(R.id.doneRate, "%50")
         builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("Notification Title")
             .setContentText("Notification Text")
             .setSmallIcon(R.drawable.ic_shopping)
+            .setCustomContentView(remoteViews)
 
         startForeground(NOTIFICATION_ID, builder.build())
 
@@ -72,6 +78,10 @@ class NotificationService: Service() {
                 content += "${it.ratio} \n"
             }
             builder.setContentText(content)
+            val remoteViews = RemoteViews(applicationContext.packageName, R.layout.notification_layout)
+            remoteViews.setTextViewText(R.id.notificationText, DateUtil.getDateInTurkishWithoutHour(unFinishedList[0].listID))
+            remoteViews.setTextViewText(R.id.doneRate, unFinishedList[0].ratio.toString())
+            builder.setCustomContentView(remoteViews)
             notificationManager.notify(NOTIFICATION_ID, builder.build())
             handler.postDelayed({
                 updateNotification()
