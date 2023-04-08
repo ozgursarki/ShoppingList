@@ -12,7 +12,6 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.ozgursarki.shoppinglist.R
 import com.ozgursarki.shoppinglist.data.local.ShoppingDatabase
-import com.ozgursarki.shoppinglist.services.adapter.NotificationAdapter
 import com.ozgursarki.shoppinglist.util.DateUtil
 import kotlinx.coroutines.*
 
@@ -23,7 +22,6 @@ class NotificationService: Service() {
     private lateinit var scope: CoroutineScope
     private var title: String = "My Notification Title"
     private lateinit var handler: Handler
-    private lateinit var adapter: NotificationAdapter
 
     companion object {
         private const val CHANNEL_ID = "my_channel_id"
@@ -34,11 +32,11 @@ class NotificationService: Service() {
     override fun onCreate() {
         handler = Handler()
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        adapter = NotificationAdapter()
 
         createNotificationChannel()
         val remoteViews = RemoteViews(applicationContext.packageName, R.layout.notification_layout)
-        remoteViews.setRemoteAdapter()
+        remoteViews.setTextViewText(R.id.notificationText, "Alışveriş")
+        remoteViews.setTextViewText(R.id.doneRate, "%50")
         builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("Notification Title")
             .setContentText("Notification Text")

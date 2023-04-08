@@ -26,11 +26,17 @@
         android:gravity="center_vertical"
         android:layout_marginStart="10dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/notificationRV"
+        <TextView
+            android:id="@+id/notificationText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:text="Cuma 25 Nisan" />
 
-
+        <TextView
+            android:id="@+id/doneRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="%25"
+            android:layout_marginTop="3dp"/>
     </LinearLayout>
 </RelativeLayout>
