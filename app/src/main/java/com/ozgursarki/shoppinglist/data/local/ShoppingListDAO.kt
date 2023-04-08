@@ -26,4 +26,7 @@ interface ShoppingListDAO {
 
     @Query("UPDATE shoppingList SET ratio = :ratio WHERE listID = :listID")
     suspend fun updateShoppingList(ratio: Int, listID: Long)
+
+    @Query("SELECT * FROM shoppingList WHERE ratio < 100")
+    suspend fun getUnfinishedList(): List<ShoppingListEntity>
 }
