@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/SCREEN"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.detail.DetailFragment">
 
@@ -30,6 +31,7 @@
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="200dp"
+        style="@style/SCREEN"
         android:layout_height="200dp"
         android:progressDrawable="@drawable/progress_bar_custom"
         android:max="100"
@@ -54,6 +56,7 @@
         android:id="@+id/detailRV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        style="@style/SCREEN"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
