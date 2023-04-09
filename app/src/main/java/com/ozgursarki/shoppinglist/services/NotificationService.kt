@@ -35,8 +35,7 @@ class NotificationService: Service() {
 
         createNotificationChannel()
         builder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("Notification Title")
-            .setContentText("Notification Text")
+            .setContentTitle(getString(R.string.shopping_list))
             .setSmallIcon(R.drawable.ic_shopping)
 
 

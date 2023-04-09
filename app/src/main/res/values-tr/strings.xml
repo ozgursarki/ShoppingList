@@ -25,6 +25,7 @@
     <string name="titlehome">ALIŞVERİŞ LİSTESİ</string>
     <string name="unfinished_list_title">Bitirilmemiş Liste Sayısı</string>
     <string name="finished_list_count">Bitirilmiş Liste Sayısı</string>
+    <string name="shopping_list">Alışveriş Listesi</string>
     <string-array name="item_type_array">
         <item>Meyve</item>
         <item>Sebze</item>

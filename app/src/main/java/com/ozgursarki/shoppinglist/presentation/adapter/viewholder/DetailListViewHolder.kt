@@ -17,6 +17,7 @@ class DetailListViewHolder(
     fun bind(shoppingItem: ShoppingItem, itemChecked: (ShoppingItem) -> Unit) {
         dataShoppingItem = shoppingItem
         binding.apply {
+            itemCheckBox.setOnCheckedChangeListener(null)
             shoppingItemName.text = shoppingItem.name
             shoppingItemCount.text = shoppingItem.count.toString()
             itemCheckBox.isChecked = shoppingItem.isDone
@@ -46,6 +47,7 @@ class DetailListViewHolder(
                 }
 
             }
+
 
             itemCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
                 itemChecked.invoke(shoppingItem.copy(isDone = !shoppingItem.isDone))

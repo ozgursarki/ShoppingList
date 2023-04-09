@@ -20,10 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/notificationImage"
-        android:layout_alignBottom="@id/notificationImage"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@id/notificationImage"
-        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -43,7 +42,7 @@
             <TextView
                 android:id="@+id/finishedListCount"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 tools:text="5" />
         </LinearLayout>
@@ -52,6 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginStart="5dp"
             android:orientation="vertical">
 
             <TextView
@@ -66,7 +66,7 @@
             <TextView
                 android:id="@+id/unfinishedListCount"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 tools:text="5" />
 
