@@ -10,9 +10,9 @@ object PopUpHelper {
 
     fun showErrorPopUp(errorMessage: String, context: Context) {
         val builder = MaterialAlertDialogBuilder(context, R.style.MyDialogTheme)
-        builder.setTitle("ERROR!")
+        builder.setTitle(context.getString(R.string.error))
         builder.setMessage(errorMessage)
-        builder.setPositiveButton("OK") { dialog, which ->
+        builder.setPositiveButton(context.getString(R.string.ok)) { dialog, which ->
 
         }
         builder.setCancelable(true)

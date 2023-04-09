@@ -13,10 +13,11 @@
     <string name="save_button_tooltip">Here! You can save the shopping list!</string>
     <string name="navigate_tooltip">Here! You can navigate to history shopping list!</string>
     <string name="delete_button_tooltip">Here! You can delete all shopping items!</string>
-    <string name="other">vegetables</string>
     <string name="title">SHOPPING LIST HISTORY</string>
     <string name="titlehome">SHOPPING LIST</string>
     <string name="unfinished_list_title">Bitirilmemiş Liste Sayısı</string>
     <string name="finished_list_count">Bitirilmiş Liste Sayısı</string>
     <string name="shopping_list">Shopping List</string>
+    <string name="error">ERROR!</string>
+    <string name="ok">OK</string>
 </resources>

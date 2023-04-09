@@ -26,6 +26,8 @@
     <string name="unfinished_list_title">Bitirilmemiş Liste Sayısı</string>
     <string name="finished_list_count">Bitirilmiş Liste Sayısı</string>
     <string name="shopping_list">Alışveriş Listesi</string>
+    <string name="error">HATA!</string>
+    <string name="ok">TAMAM</string>
     <string-array name="item_type_array">
         <item>Meyve</item>
         <item>Sebze</item>

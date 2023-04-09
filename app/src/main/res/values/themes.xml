@@ -17,7 +17,7 @@
     </style>
     
     <style name="BUTTON">
-        <item name="android:background">@color/RedPink</item>
+        <item name="android:backgroundTint">@color/BabyBlue</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
