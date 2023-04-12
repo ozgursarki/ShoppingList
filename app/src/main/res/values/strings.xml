@@ -26,6 +26,9 @@
     <string name="finished_list_count">Finished List Count</string>
     <string name="shopping_list">Shopping List</string>
     <string name="error">ERROR!</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="yesterday">Yesterday</string>
     <string name="ok">OK</string>
     <string-array name="item_type_array">
         <item>Fruit</item>

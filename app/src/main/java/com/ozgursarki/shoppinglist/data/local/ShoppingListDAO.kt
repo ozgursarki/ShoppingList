@@ -32,4 +32,7 @@ interface ShoppingListDAO {
 
     @Query("SELECT * FROM shoppingList WHERE ratio = 100")
     suspend fun getFinishedList(): List<ShoppingListEntity>
+
+    @Query("SELECT * FROM shoppingList WHERE listID / 86400000 = :dateMillis / 86400000")
+    suspend fun getListsByDate(dateMillis: Long): List<ShoppingListEntity>
 }

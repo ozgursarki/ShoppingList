@@ -16,8 +16,10 @@ import com.ozgursarki.shoppinglist.databinding.FragmentHistoryBinding
 import com.ozgursarki.shoppinglist.domain.model.ShoppingList
 import com.ozgursarki.shoppinglist.presentation.adapter.HistoryListAdapter
 import com.ozgursarki.shoppinglist.presentation.adapter.viewholder.HistoryListViewHolder
+import com.ozgursarki.shoppinglist.util.DateUtil
 import com.ozgursarki.shoppinglist.util.SwipeToDeleteCallback
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Calendar
 
 @AndroidEntryPoint
 class HistoryFragment : Fragment() {
@@ -43,14 +45,15 @@ class HistoryFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-        val swipeGesture = object: SwipeToDeleteCallback() {
+        val swipeGesture = object : SwipeToDeleteCallback() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val shoppingList = mutableListOf<ShoppingList>()
-                historyListAdapter.getHistoryItemList().toMutableList().map { shoppingListFromAdapter ->
-                    val localeShoppingList = shoppingListFromAdapter.copy()
-                    shoppingList.add(localeShoppingList)
-                }
+                historyListAdapter.getHistoryItemList().toMutableList()
+                    .map { shoppingListFromAdapter ->
+                        val localeShoppingList = shoppingListFromAdapter.copy()
+                        shoppingList.add(localeShoppingList)
+                    }
 
                 (viewHolder as HistoryListViewHolder).getShoppingList()
                     ?.let {
@@ -63,7 +66,7 @@ class HistoryFragment : Fragment() {
                     newArraylist.add(it)
                 }
                 historyListAdapter.setHistoryShoppingList(newArraylist)
-                historyViewModel.getAllShoppingList()
+                historyViewModel.getListByDate()
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeGesture)
@@ -80,20 +83,35 @@ class HistoryFragment : Fragment() {
             addItemDecoration(mDividerItemDecoration)
         }
 
-        historyViewModel.shoppingList.observe(viewLifecycleOwner) { shoppingListFromDatabase ->
+        historyViewModel.historyUIState.observe(viewLifecycleOwner) { shoppingListFromDatabase ->
             handleShoppingList(shoppingListFromDatabase)
+        }
+
+        binding.backButton.setOnClickListener {
+            historyViewModel.changeDate(false)
+            historyViewModel.getListByDate()
+        }
+
+        binding.forwardButton.setOnClickListener {
+            historyViewModel.changeDate(true)
+            historyViewModel.getListByDate()
         }
 
         binding.createShoppingList.setOnClickListener {
             historyViewModel.deleteShoppingList(historyViewModel.getListID())
             historyViewModel.deleteShoppingItemsFromDatabase()
-            findNavController().navigate(R.id.action_historyFragment_to_homeScreenFragment)
+            val action = historyViewModel.historyUIState.value?.date?.let { it1 ->
+                HistoryFragmentDirections.actionHistoryFragmentToHomeScreenFragment(
+                    it1.timeInMillis
+                )
+            }
+            action?.let { it1 -> findNavController().navigate(it1) }
         }
     }
 
-    private fun handleShoppingList(shoppingList: List<ShoppingList>) {
+    private fun handleShoppingList(historyUIState: HistoryUIState) {
         val shoppingArrayList = arrayListOf<ShoppingList>()
-        shoppingList.forEach {
+        historyUIState.list.forEach {
             shoppingArrayList.add(it.copy())
         }
 
@@ -101,11 +119,13 @@ class HistoryFragment : Fragment() {
             binding.apply {
                 historyRV.visibility = View.GONE
                 viewNoData.visibility = View.VISIBLE
+                date.text = DateUtil.parseDateText(requireContext(), historyUIState.date)
             }
-        }else {
+        } else {
             binding.apply {
                 historyRV.visibility = View.VISIBLE
                 viewNoData.visibility = View.GONE
+                date.text = DateUtil.parseDateText(requireContext(), historyUIState.date)
             }
             historyListAdapter.setHistoryShoppingList(shoppingArrayList)
 
@@ -115,7 +135,8 @@ class HistoryFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        historyViewModel.getAllShoppingList()
+        historyViewModel.getListByDate()
     }
+
 
 }

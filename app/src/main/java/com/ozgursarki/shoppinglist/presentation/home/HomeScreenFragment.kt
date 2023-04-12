@@ -13,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.ozgursarki.shoppinglist.R
@@ -37,6 +38,7 @@ class HomeScreenFragment : Fragment() {
     private lateinit var binding: FragmentHomeScreenBinding
     private lateinit var adapter: ShoppingListAdapter
     private val homeScreenViewModel: HomeScreenViewModel by viewModels()
+    private val args: HomeScreenFragmentArgs by navArgs()
 
 
     override fun onCreateView(
@@ -45,7 +47,10 @@ class HomeScreenFragment : Fragment() {
     ): View {
         binding = FragmentHomeScreenBinding.inflate(inflater)
 
-        if (homeScreenViewModel.getListID() == -1L) {
+        val listID = args.date
+        homeScreenViewModel.saveListID(listID)
+
+        if (homeScreenViewModel.getListID() == -1L && homeScreenViewModel.getListID() == 0L) {
             val date = Calendar.getInstance(DateUtil.LOCALE_EN)
             val shoppingList = ShoppingList(date.timeInMillis)
             homeScreenViewModel.insertShoppingList(shoppingList)
@@ -145,8 +150,6 @@ class HomeScreenFragment : Fragment() {
         }
 
         binding.toolBar.findViewById<ActionMenuItemView>(R.id.navigate).setOnClickListener {
-            //homeScreenViewModel.deleteShoppingList()
-            //homeScreenViewModel.deleteShoppingItemsFromDatabase(homeScreenViewModel.getListID())
             if (!adapter.isListEmpty()) {
                 homeScreenViewModel.deleteShoppingList()
             }

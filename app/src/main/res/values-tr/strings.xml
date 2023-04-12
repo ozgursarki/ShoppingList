@@ -28,6 +28,9 @@
     <string name="shopping_list">Alışveriş Listesi</string>
     <string name="error">HATA!</string>
     <string name="ok">TAMAM</string>
+    <string name="today">Bugün</string>
+    <string name="tomorrow">Yarın</string>
+    <string name="yesterday">Dün</string>
     <string-array name="item_type_array">
         <item>Meyve</item>
         <item>Sebze</item>

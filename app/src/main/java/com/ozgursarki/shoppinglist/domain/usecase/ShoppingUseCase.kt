@@ -21,5 +21,6 @@ data class ShoppingUseCase(
     val saveDeleteToolTip: SaveDeleteToolTip,
     val saveHistoryToolTip: SaveHistoryToolTip,
     val saveSaveToolTip: SaveSaveToolTip,
-    val updateShoppingList: UpdateShoppingList
+    val updateShoppingList: UpdateShoppingList,
+    val getShoppingListByDate: GetShoppingListByDate
 )

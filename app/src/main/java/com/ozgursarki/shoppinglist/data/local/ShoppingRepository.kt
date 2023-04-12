@@ -66,6 +66,12 @@ class ShoppingRepository @Inject constructor(
         shoppingListDAO.updateShoppingList(ratio, listID)
     }
 
+    suspend fun getListsByDate(listID: Long): List<ShoppingList> {
+        return shoppingListDAO.getListsByDate(listID).map {
+            it.toShoppingList()
+        }
+    }
+
     fun saveListID(listID: Long) {
         defaultPreferences.saveListID(listID)
     }
